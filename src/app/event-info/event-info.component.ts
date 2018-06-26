@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { GetfromapiService } from '../getfromapi.service'
+import { SharedinfoService } from '../sharedinfo.service'
 
 @Component({
   selector: 'app-event-info',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventInfoComponent implements OnInit {
 
-  constructor() { }
+  constructor(private sharedInfo: SharedinfoService, private getFromApiService: GetfromapiService) { }
 
   ngOnInit() {
   }
 
+  onClick() {
+    this.sharedInfo.aux=!this.sharedInfo.aux;
+  }
 }

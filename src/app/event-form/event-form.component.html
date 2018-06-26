@@ -1,3 +1,4 @@
-<p>
-  event-form works!
-</p>
+<div *ngIf="!sharedInfo.aux">
+  Introduce the Event id: <input [(ngModel)]="inputId" ><br>
+  <button (click)="onClick()">Display info</button>
+</div>

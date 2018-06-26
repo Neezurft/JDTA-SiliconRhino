@@ -1,3 +1,5 @@
-<p>
-  event-info works!
-</p>
+<div *ngIf="sharedInfo.aux">
+This is the information of the Event:<br>
+Event id:{{sharedInfo.id}}<br>
+<button (click)="onClick()">Go back</button>
+</div>

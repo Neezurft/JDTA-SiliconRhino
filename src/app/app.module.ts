@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import { EventFormComponent } from './event-form/event-form.component';
 import { EventInfoComponent } from './event-info/event-info.component';
 
+import { FormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -12,7 +14,8 @@ import { EventInfoComponent } from './event-info/event-info.component';
     EventInfoComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

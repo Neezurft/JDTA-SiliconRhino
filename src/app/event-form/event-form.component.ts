@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { GetfromapiService } from '../getfromapi.service';
+import { SharedinfoService } from '../sharedinfo.service';
+
 
 @Component({
   selector: 'app-event-form',
@@ -7,9 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventFormComponent implements OnInit {
 
-  constructor() { }
+  inputId : number;
+
+  constructor(private sharedInfo: SharedinfoService, private getFromApi: GetfromapiService) { }
 
   ngOnInit() {
+  }
+
+  onClick(){
+      this.sharedInfo.id = this.inputId;
+      this.sharedInfo.aux=!this.sharedInfo.aux;
   }
 
 }
