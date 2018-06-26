@@ -1,5 +1,15 @@
 <div *ngIf="sharedInfo.aux">
-This is the information of the Event:<br>
-Event id:{{sharedInfo.id}}<br>
-<button (click)="onClick()">Go back</button>
+  This is the information of the Event:
+  <ul>
+    <li>Id:            {{getFromApi.event['id']}}</li>
+    <li>Title:         {{getFromApi.event['title']}}</li>
+    <li>Type:          {{getFromApi.event['type']}}</li>
+    <li>Location Name: {{getFromApi.event['location']['name']}}</li>
+    <li>Time:          {{getFromApi.event['time']}}</li>
+    <li>Comments:</li>
+      <li *ngFor="let n of getFromApi.event['comments']">
+          -- {{n['message']}}
+      </li>
+  </ul>
+  <button (click)="onClick()">Go back</button>
 </div>

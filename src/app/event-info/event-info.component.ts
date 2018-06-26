@@ -9,7 +9,7 @@ import { SharedinfoService } from '../sharedinfo.service'
 })
 export class EventInfoComponent implements OnInit {
 
-  constructor(private sharedInfo: SharedinfoService, private getFromApiService: GetfromapiService) { }
+  constructor(private sharedInfo: SharedinfoService, public getFromApi: GetfromapiService) { }
 
   ngOnInit() {
   }

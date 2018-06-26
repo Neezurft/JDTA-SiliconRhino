@@ -6,7 +6,6 @@ import { Injectable } from '@angular/core';
 export class SharedinfoService {
 
   aux : boolean = false;
-  id : number;
 
   constructor() { }
 }

@@ -10,16 +10,24 @@ import { SharedinfoService } from '../sharedinfo.service';
 })
 export class EventFormComponent implements OnInit {
 
-  inputId : number;
+  inputId : string;
 
   constructor(private sharedInfo: SharedinfoService, private getFromApi: GetfromapiService) { }
 
   ngOnInit() {
   }
 
+  // Pressing Enter while in input field
+  // submits the value (equivalent to clicking the button)  
+  onKey(event: any) {
+    if(event.keyCode===13)
+      this.onClick();
+  }
+
   onClick(){
-      this.sharedInfo.id = this.inputId;
-      
+
+      this.getFromApi.getEvent(this.inputId);
+      //Tell the app to show the info and not the form
       this.sharedInfo.aux=!this.sharedInfo.aux;
   }
 

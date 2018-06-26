@@ -1,4 +1,6 @@
 <div *ngIf="!sharedInfo.aux">
-  Introduce the Event id: <input [(ngModel)]="inputId" ><br>
+  Introduce the Event id:
+  <input (keyup)="onKey($event)" [(ngModel)]="inputId">
+  <br>
   <button (click)="onClick()">Display info</button>
 </div>
