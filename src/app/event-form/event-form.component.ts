@@ -19,6 +19,7 @@ export class EventFormComponent implements OnInit {
 
   onClick(){
       this.sharedInfo.id = this.inputId;
+      
       this.sharedInfo.aux=!this.sharedInfo.aux;
   }
 
