@@ -119,3 +119,15 @@ img.avatar{
   font-size: 3.5em;
   font-weight: bold;
 }
+
+.error{
+  font-size: 100px;
+  color: #4c3800;
+  margin-top: 1em;
+  margin-bottom: 0.2em;
+}
+
+.error-message{
+  font-size: 2em;
+  margin-bottom: 1em;
+}

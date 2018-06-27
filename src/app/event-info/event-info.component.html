@@ -1,5 +1,7 @@
 <div *ngIf="sharedInfo.aux" class="drinks-app">
-  <div>
+
+  <!-- Displaying Event's gen. info -->
+  <div *ngIf="!getFromApi.error">
     <h1 class="event-name">{{getFromApi.events[0]['title']}}</h1>
     <div>
       <div>{{getFromApi.events[0]['time'] | date: 'long'}}</div>
@@ -8,9 +10,10 @@
       <strong>
         <div>{{getFromApi.events[0]['type']}}</div>
         <div>@ {{getFromApi.events[0]['location']['name']}}</div>
-      </strong>      
+      </strong>
       <br>
 
+      <!-- Displaying Comments -->
 
       <div *ngIf="getFromApi.events[0]['comments']!=''">
         <div class="pull-left">
@@ -22,26 +25,44 @@
           <br>
 
           <div *ngFor="let n of getFromApi.events[0]['comments']; let i=index" class="row">
+
             <div class="col-xs-2">
               <img class="avatar" src="{{n['user']['avatarUrl']}}" height="50" width="50">
             </div>
 
             <div class="col-xs-10">
               <div class="comment-box">
-                  <div class="row text-left"><strong>{{n['user']['name']}}</strong></div>
-                  <div class="row text-center">{{n['message']}}</div>
-                  <div class="time row text-right text-muted">
-                    {{n['timestamp'] | date: 'short'}}
-                  </div>
+                <div class="row text-left">
+                  <strong>{{n['user']['name']}}</strong>
+                </div>
+                <div class="row text-center">{{n['message']}}</div>
+                <div class="time row text-right text-muted">
+                  {{n['timestamp'] | date: 'short'}}
+                </div>
               </div>
             </div>
 
           </div>
+          <!-- Individual Comment wrapper -->
 
         </div>
       </div>
+      <!-- Comments Section -->
 
     </div>
-    <button (click)="onClick()" class="btn btn-lg btn-primary btn-block">Go back</button>
+
   </div>
+  <!-- End of Event info -->
+
+  <div *ngIf="getFromApi.error">    
+    
+    <span class="glyphicon glyphicon-alert error" aria-hidden="true"></span>
+    <p class="error-message">
+        Sorry, there has been an error<br>
+        please try again.
+    </p>
+    
+  </div>
+
+  <button (click)="onClick()" class="btn btn-lg btn-primary btn-block">Go back</button>
 </div>

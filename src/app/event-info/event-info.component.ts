@@ -16,5 +16,6 @@ export class EventInfoComponent implements OnInit {
 
   onClick() {
     this.sharedInfo.aux=!this.sharedInfo.aux;
+    this.getFromApi.error=false;
   }
 }
