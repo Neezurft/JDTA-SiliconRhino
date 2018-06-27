@@ -114,9 +114,9 @@ img.avatar{
 }
 
 .event-name{
-  font-family: "Brush Script MT", Brush Script Std, cursive;
+  /* font-family: "Brush Script MT", Brush Script Std, cursive; */
   color: #4C3800;
-  font-size: 3.5em;
+  font-size: 3em;
   font-weight: bold;
 }
 
