@@ -39,4 +39,4 @@ testem.log
 Thumbs.db
 
 # Test files
-mock-event.json
+/src/assets/mock-event.json
