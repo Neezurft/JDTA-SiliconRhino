@@ -1,15 +1,47 @@
-<div *ngIf="sharedInfo.aux">
-  This is the information of the Event:
-  <ul>
-    <li>Id:            {{getFromApi.event['id']}}</li>
-    <li>Title:         {{getFromApi.event['title']}}</li>
-    <li>Type:          {{getFromApi.event['type']}}</li>
-    <li>Location Name: {{getFromApi.event['location']['name']}}</li>
-    <li>Time:          {{getFromApi.event['time']}}</li>
-    <li>Comments:</li>
-      <li *ngFor="let n of getFromApi.event['comments']; let i=index">
-          -- {{i+1}} {{n['message']}}
-      </li>
-  </ul>
-  <button (click)="onClick()">Go back</button>
+<div *ngIf="sharedInfo.aux" class="drinks-app">
+  <div>
+    <h1 class="event-name">{{getFromApi.events[0]['title']}}</h1>
+    <div>
+      <div>{{getFromApi.events[0]['time'] | date: 'long'}}</div>
+
+      <br>
+      <strong>
+        <div>{{getFromApi.events[0]['type']}}</div>
+        <div>@ {{getFromApi.events[0]['location']['name']}}</div>
+      </strong>      
+      <br>
+
+
+      <div *ngIf="getFromApi.events[0]['comments']!=''">
+        <div class="pull-left">
+          <strong>Comments:</strong>
+        </div>
+        <br>
+
+        <div class="container-fluid">
+          <br>
+
+          <div *ngFor="let n of getFromApi.events[0]['comments']; let i=index" class="row">
+            <div class="col-xs-2">
+              <img class="avatar" src="{{n['user']['avatarUrl']}}" height="50" width="50">
+            </div>
+
+            <div class="col-xs-10">
+              <div class="comment-box">
+                  <div class="row text-left"><strong>{{n['user']['name']}}</strong></div>
+                  <div class="row text-center">{{n['message']}}</div>
+                  <div class="time row text-right text-muted">
+                    {{n['timestamp'] | date: 'short'}}
+                  </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+    <button (click)="onClick()" class="btn btn-lg btn-primary btn-block">Go back</button>
+  </div>
 </div>

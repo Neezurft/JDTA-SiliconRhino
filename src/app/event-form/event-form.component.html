@@ -1,6 +1,7 @@
-<div *ngIf="!sharedInfo.aux">
-  Introduce the Event id:
-  <input (keyup)="onKey($event)" [(ngModel)]="inputId">
+<div *ngIf="!sharedInfo.aux" class="drinks-app">
+  <img class="mb-4" src="/assets/drinksIm.png" alt="" width="250" height="250">
+  <h1 class="h3 mb-3 font-weight-normal">Get event's details:</h1>
+  <input (keyup)="onKey($event)" [(ngModel)]="inputId" class="form-control" placeholder="Event Id" required autofocus>
   <br>
-  <button (click)="onClick()">Display info</button>
+  <button (click)="onClick()" class="btn btn-lg btn-primary btn-block">Display Meetup Info</button>
 </div>

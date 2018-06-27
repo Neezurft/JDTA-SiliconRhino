@@ -7,7 +7,7 @@ import { Event } from './event';
 })
 export class GetfromapiService {
 
-  event: Event;
+  events: Event[] = new Array();
 
   url = 'https://mock-api.drinks.test.siliconrhino.io/events/';
 
@@ -16,7 +16,7 @@ export class GetfromapiService {
   getEvent(id) {
 
     this.http.get<Event>(this.url+id).subscribe(
-      (data: Event) => this.event = data
+      (data: Event) => this.events[0] = data
     );
 
   }
