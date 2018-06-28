@@ -11,7 +11,27 @@
         <div>{{getFromApi.events[sharedInfo.currentEvent-1]['type']}}</div>
         <div>@ {{getFromApi.events[sharedInfo.currentEvent-1]['location']['name']}}</div>
       </strong>
+      <div>hosted by: {{getFromApi.events[sharedInfo.currentEvent-1]['creator']['name']}}</div>
       <br>
+
+      <!-- Displaying Attendees -->
+
+      <div class="pull-left">
+          <strong>Attending ({{getFromApi.events[sharedInfo.currentEvent-1]['guests'].length}}):</strong>
+        </div><br><br>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div *ngFor="let g of getFromApi.events[sharedInfo.currentEvent-1]['guests']" class="col-xs-3">
+            <div class="row">
+              <img class="avatar" src="{{g['avatarUrl']}}" height="50" width="50">
+            </div>
+            <div class="row">
+              {{g['name']}}
+            </div>
+          </div>
+        </div>
+      </div><br>
 
       <!-- Displaying Comments -->
 
@@ -52,7 +72,7 @@
       <!-- Displaying Pagination Controls -->
       <nav *ngIf="getFromApi.events.length>1" aria-label="Page navigation">
         <ul class="pagination">
-          <li *ngIf="sharedInfo.currentEvent>1" (click)="decEvent()" >
+          <li *ngIf="sharedInfo.currentEvent>1" (click)="decEvent()">
             <a aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
             </a>
@@ -60,7 +80,7 @@
 
           <li *ngFor="let n of getFromApi.events; index as i" (click)="changeEvent(i)">
             <a>{{i+1}}</a>
-          </li>  
+          </li>
 
           <li *ngIf="sharedInfo.currentEvent<getFromApi.events.length" (click)="incEvent()">
             <a aria-label="Next">
@@ -69,22 +89,20 @@
           </li>
         </ul>
       </nav>
-       <!-- End of Pagination Controls -->
+      <!-- End of Pagination Controls -->
 
     </div>
 
   </div>
   <!-- End of Event info -->
 
-  <div *ngIf="getFromApi.error || getFromApi.events.length==0">    
-    
+  <div *ngIf="getFromApi.error || getFromApi.events.length==0">
+
     <span class="glyphicon glyphicon-alert error" aria-hidden="true"></span>
     <p class="error-message">
-        Sorry, there has been an error 
-        or your search did not produce 
-        any results. Please try again.
+      Sorry, there has been an error or your search did not produce any results. Please try again.
     </p>
-    
+
   </div>
 
   <button id="goBackBtn" (click)="onClick()" class="btn btn-lg btn-primary btn-block">Go back</button>
