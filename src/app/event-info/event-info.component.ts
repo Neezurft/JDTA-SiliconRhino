@@ -19,6 +19,31 @@ export class EventInfoComponent implements OnInit {
     this.getFromApi.error=false;
   }  
 
+  imgUrl(type: string): string{
+    
+    let iUrl: string;
+
+    switch(type){
+
+      case 'BEERS':
+        iUrl='/assets/beer-icon.png';
+      break;
+
+      case 'COCKTAILS':
+        iUrl='/assets/cocktail-icon.png';
+      break;
+
+      case 'COFFEES':
+        iUrl='/assets/coffee-icon.png';
+      break;
+
+      case 'MILKSHAKES':
+        iUrl='/assets/milkshake-icon.png';
+      break;
+
+    }
+    return iUrl;
+  }
 
   //Pagination controls
   
@@ -32,6 +57,12 @@ export class EventInfoComponent implements OnInit {
 
   incEvent(i){    
       this.sharedInfo.currentEvent++;
+  }
+
+  googleMapLink(lat,lon):string{
+
+    return "https://www.google.com/maps/?q="+lat+","+lon;
+
   }
   
 }

@@ -2,14 +2,21 @@
 
   <!-- Displaying Event's gen. info -->
   <div *ngIf="!(getFromApi.error || getFromApi.events.length==0)">
-    <h1 class="event-name">{{getFromApi.events[sharedInfo.currentEvent-1]['title']}}</h1>
+    <h1 class="event-name">
+      {{getFromApi.events[sharedInfo.currentEvent-1]['title']}}
+      <img src="{{imgUrl(getFromApi.events[sharedInfo.currentEvent-1]['type'])}}" height="30">
+    </h1>
     <div>
       <div>{{getFromApi.events[sharedInfo.currentEvent-1]['time'] | date: 'long'}}</div>
-
-      <br>
-      <strong>
-        <div>{{getFromApi.events[sharedInfo.currentEvent-1]['type']}}</div>
-        <div>@ {{getFromApi.events[sharedInfo.currentEvent-1]['location']['name']}}</div>
+      
+      <strong>        
+        <!-- <div >{{getFromApi.events[sharedInfo.currentEvent-1]['type']}}</div> -->
+        <div>
+          @ {{getFromApi.events[sharedInfo.currentEvent-1]['location']['name']}}
+          <a href="{{googleMapLink(getFromApi.events[sharedInfo.currentEvent-1]['location']['latitude'],getFromApi.events[sharedInfo.currentEvent-1]['location']['longitude'])}}" target="_blank">
+            <span class="glyphicon glyphicon-map-marker loc" aria-hidden="true"></span>
+          </a>
+        </div>
       </strong>
       <div>hosted by: {{getFromApi.events[sharedInfo.currentEvent-1]['creator']['name']}}</div>
       <br>
