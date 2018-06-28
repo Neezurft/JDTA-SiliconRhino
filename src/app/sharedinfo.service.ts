@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class SharedinfoService {
 
   aux : boolean = false;
+  currentEvent: number = 1;
 
   constructor() { }
 }

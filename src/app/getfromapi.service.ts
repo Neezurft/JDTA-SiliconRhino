@@ -8,16 +8,28 @@ import { Event } from './event';
 export class GetfromapiService {
 
   events: Event[] = new Array();
+  //eventBuffer: Event = new Event();
   error: boolean = false;
 
-  url = 'https://mock-api.drinks.test.siliconrhino.io/events/';
+  url = 'https://mock-api.drinks.test.siliconrhino.io/events?';
 
   constructor(private http: HttpClient) { }
 
-  getEvent(id) {
-    this.http.get<Event>(this.url+id).subscribe(
-      (data: Event) => this.events[0] = data,
-      error => this.error=true
-    );
+  getEvent(term) {
+
+    //let auxGet: boolean = true;
+    //let eventBuffer: Event = new Event();
+    //let a;
+
+    //for(let i=1;i<3;i++){
+
+      this.http.get<Event[]>(this.url+"page="+"1"+"&pageSize="+"10"+"&search="+term).subscribe(
+        (data: Event[]) => this.events = data,
+        error => this.error=true
+      );
+
+    //}    
+    
   }
+
 }

@@ -17,5 +17,21 @@ export class EventInfoComponent implements OnInit {
   onClick() {
     this.sharedInfo.aux=!this.sharedInfo.aux;
     this.getFromApi.error=false;
+  }  
+
+
+  //Pagination controls
+  
+  changeEvent(i){
+    this.sharedInfo.currentEvent=i+1;
   }
+
+  decEvent(i){    
+      this.sharedInfo.currentEvent--;
+  }
+
+  incEvent(i){    
+      this.sharedInfo.currentEvent++;
+  }
+  
 }

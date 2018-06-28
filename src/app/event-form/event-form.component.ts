@@ -10,7 +10,7 @@ import { SharedinfoService } from '../sharedinfo.service';
 })
 export class EventFormComponent implements OnInit {
 
-  inputId : string;
+  inputText: string = '';
 
   constructor(private sharedInfo: SharedinfoService, private getFromApi: GetfromapiService) { }
 
@@ -26,9 +26,10 @@ export class EventFormComponent implements OnInit {
 
   onClick(){
 
-      this.getFromApi.getEvent(this.inputId);
-      //Tell the app to show the info and not the form
-      this.sharedInfo.aux=!this.sharedInfo.aux;
+      this.getFromApi.getEvent(this.inputText);
+      //Toggle to event info view.
+      this.sharedInfo.currentEvent = 1;
+      this.sharedInfo.aux = !this.sharedInfo.aux;
   }
 
 }
