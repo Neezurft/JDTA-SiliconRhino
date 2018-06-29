@@ -25,14 +25,18 @@ export class EventFormComponent implements OnInit {
   }
 
   onClick(){
-    
+
     //Toggle to event info view.
     this.sharedInfo.currentEvent = 1;
     this.sharedInfo.showInfo=!this.sharedInfo.showInfo;
     this.getFromApi.loaded=false;
+    
+    //Added small delay to make transitions more subtle
+
+    setTimeout(()=>{this.getFromApi.getEvent(this.inputText);},100);
 
     //Get Event details
-    this.getFromApi.getEvent(this.inputText);      
+          
     
   }
 

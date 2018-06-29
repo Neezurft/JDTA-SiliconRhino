@@ -61,6 +61,8 @@ export class EventInfoComponent implements OnInit {
 
   googleMapLink(lat,lon):string{
 
+    //TODO Part of the map preview fix
+    //return "https://maps.google.com/maps?width=100%&height=600&hl=en&coord=51.517608,-0.127625&q=Malet%20St%2C%20London%20WC1E%207HU%2C%20United%20Kingdom+(Your%20Business%20Name)&ie=UTF8&t=&z=18&iwloc=B&output=embed";
     return "https://www.google.com/maps/?q="+lat+","+lon;
 
   }
