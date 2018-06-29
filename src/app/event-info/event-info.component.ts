@@ -17,7 +17,6 @@ export class EventInfoComponent implements OnInit {
   onClick() {
     this.sharedInfo.showInfo=!this.sharedInfo.showInfo;
     this.getFromApi.error=false;
-    this.getFromApi.loaded=false;
   }  
 
   imgUrl(type: string): string{
