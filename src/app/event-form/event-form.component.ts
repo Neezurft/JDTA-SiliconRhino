@@ -25,11 +25,25 @@ export class EventFormComponent implements OnInit {
   }
 
   onClick(){
+    //let start; TODO remove the delay stuff
+    //let milliseconds;
 
-      this.getFromApi.getEvent(this.inputText);
-      //Toggle to event info view.
-      this.sharedInfo.currentEvent = 1;
-      this.sharedInfo.aux = !this.sharedInfo.aux;
+    //Toggle to event info view.
+    this.sharedInfo.currentEvent = 1;
+    this.sharedInfo.showInfo=!this.sharedInfo.showInfo;
+
+    //Delay    
+    // start = new Date().getTime();
+    // milliseconds = 0;
+    // for(let i=0;i<1e7;i++)
+    // {
+    //   if((new Date().getTime() - start) > milliseconds) 
+    //     break;
+    // }
+
+    //Get Event details
+    this.getFromApi.getEvent(this.inputText);      
+    
   }
 
 }

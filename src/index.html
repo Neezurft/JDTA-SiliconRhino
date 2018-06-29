@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>JDTA</title>
@@ -7,14 +8,65 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="imagex-icon" href="favicon.ico">
+  <!-- Inline styles so that the loading div is stiled before everything else loads... -->
+  <style type="text/css">
+    html,
+    body {
+      height: 100%;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      display: -ms-flexbox;
+      -ms-flex-align: center;
+      align-items: center;
+      padding-top: 0px;
+      padding-bottom: 40px;
+      background-color: #e5cb90;
+    }
+
+    p {
+      text-align: center;
+    }
+
+    .loader {
+      box-sizing: border-box;
+      border: 10px solid #f3f3f3;
+      border-top: 10px solid #4c3800;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      -webkit-animation: spin 2s linear infinite;
+      animation: spin 1.5s linear infinite;
+      margin-top: 10em;
+      margin-bottom: 0.2em;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+  </style>
 </head>
+
 <body class="text-center">
-  <app-root></app-root>
+  <app-root>
+    <!-- Loading div that will be replaced once the app is fully loaded -->
+    <div class="loader"></div>
+  </app-root>
   <p class="mt-5 mb-3">Silicon Rhino &copy;2018</p>
   <p>
     <a href="https://github.com/Neezurft/JDTA-SiliconRhino" target="_blank">
-      <img border="0" alt="GitHub" src="/assets/GitHub_Logo.png"  height="25">
+      <img border="0" alt="GitHub" src="/assets/GitHub_Logo.png" height="25">
     </a>
   </p>
 </body>
+
 </html>

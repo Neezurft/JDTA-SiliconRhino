@@ -1,4 +1,10 @@
 @import 'https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css';
+/* Note:
+    There are some inline styles defined in index.html.
+    They were defined in there in order for the loading div to be styled
+    before all styles load.    
+*/
+
 /*General styling for the App*/
 
 html,
@@ -8,7 +14,6 @@ body {
 
 body {
   display: -ms-flexbox;
-  /* display: flex; */
   -ms-flex-align: center;
   align-items: center;
   padding-top: 0px;

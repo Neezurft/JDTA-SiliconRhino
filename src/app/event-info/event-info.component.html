@@ -1,4 +1,12 @@
-<div *ngIf="sharedInfo.aux" class="drinks-app">
+ <!-- Loading screen -->
+
+ <div *ngIf="sharedInfo.showInfo&&(!getFromApi.loaded)">
+  <div class="loader"></div>
+</div>
+
+ <!-- Event Info Screen -->
+
+<div *ngIf="sharedInfo.showInfo&&getFromApi.loaded" class="drinks-app">
 
   <!-- Displaying Event's gen. info -->
   <div *ngIf="!(getFromApi.error || getFromApi.events.length==0)">
@@ -102,8 +110,8 @@
 
   </div>
   <!-- End of Event info -->
-
-  <div *ngIf="getFromApi.error || getFromApi.events.length==0">
+  
+  <div *ngIf="(getFromApi.error || getFromApi.events.length==0)">
 
     <span class="glyphicon glyphicon-alert error" aria-hidden="true"></span>
     <p class="error-message">
