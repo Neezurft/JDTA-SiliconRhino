@@ -1,6 +1,6 @@
 # JDTA
 
-This is a solution for the Junior Developer Technical Assessment @ [SiliconRhino](https://siliconrhino.io).
+This is a solution for the Junior Developer Technical Assessment @ [SiliconRhino](https://www.siliconrhino.io).
 
 The SPA Project retrieves data from a mock-API and displays them to the user.
 
