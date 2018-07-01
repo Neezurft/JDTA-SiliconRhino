@@ -10,7 +10,7 @@ import { ElementRef } from '@angular/core'
 })
 export class EventInfoComponent implements OnInit {
 
-  constructor(private hostElement: ElementRef, private sharedInfo: SharedinfoService, public getFromApi: GetfromapiService) { }
+  constructor(private hostElement: ElementRef, public sharedInfo: SharedinfoService, public getFromApi: GetfromapiService) { }
 
   ngOnInit() {
   }
@@ -27,19 +27,19 @@ export class EventInfoComponent implements OnInit {
     switch(type){
 
       case 'BEERS':
-        iUrl='/assets/beer-icon.png';
+        iUrl='./assets/beer-icon.png';
       break;
 
       case 'COCKTAILS':
-        iUrl='/assets/cocktail-icon.png';
+        iUrl='./assets/cocktail-icon.png';
       break;
 
       case 'COFFEES':
-        iUrl='/assets/coffee-icon.png';
+        iUrl='./assets/coffee-icon.png';
       break;
 
       case 'MILKSHAKES':
-        iUrl='/assets/milkshake-icon.png';
+        iUrl='./assets/milkshake-icon.png';
       break;
 
     }
@@ -65,14 +65,16 @@ export class EventInfoComponent implements OnInit {
 
   googleMapLink(lat,lon):string{
 
-    return "https://maps.google.com/maps?width=100%&height=600&hl=en&q="+lat+","+lon+"&ie=UTF8z=18&output=embed";
+    return "https://maps.google.com/maps?q="+lat+","+lon+"&output=embed";
   }
 
   toggleMapView(){
+
     this.hostElement.nativeElement.querySelector('iFrame').hidden=!this.hostElement.nativeElement.querySelector('iFrame').hidden;
   }
 
   hideMapView(){
+
     this.hostElement.nativeElement.querySelector('iFrame').hidden=true;
   }
 

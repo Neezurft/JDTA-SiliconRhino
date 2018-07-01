@@ -12,7 +12,7 @@ export class EventFormComponent implements OnInit {
 
   inputText: string = '';
 
-  constructor(private sharedInfo: SharedinfoService, private getFromApi: GetfromapiService) { }
+  constructor(public sharedInfo: SharedinfoService, private getFromApi: GetfromapiService) { }
 
   ngOnInit() {
   }

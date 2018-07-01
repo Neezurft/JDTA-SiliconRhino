@@ -30,7 +30,7 @@
       <br>
 
       <!-- Displaying map preview  -->
-      <iframe id="gMap" class="map" hidden="true" src="" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
+      <iframe id="gMap" class="map zoomIn animated" hidden="true" src="" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
         <span id="{{ iFrameSrc(getFromApi.events[sharedInfo.currentEvent-1]['location']['latitude'],getFromApi.events[sharedInfo.currentEvent-1]['location']['longitude']) }}"></span>
       </iframe>
       
@@ -95,21 +95,22 @@
       <!-- Displaying Pagination Controls -->
       <nav *ngIf="getFromApi.events.length>1" aria-label="Page navigation">
         <ul class="pagination">
-          <li *ngIf="sharedInfo.currentEvent>1" (click)="decEvent()">
-            <a aria-label="Previous">
+          <button *ngIf="sharedInfo.currentEvent>1" (click)="decEvent()">
+           
               <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
+            
+          </button>
 
-          <li *ngFor="let n of getFromApi.events; index as i" (click)="changeEvent(i)">
-            <a>{{i+1}}</a>
-          </li>
+          <button *ngFor="let n of getFromApi.events; index as i" (click)="changeEvent(i)">
+           <span *ngIf="(this.sharedInfo.currentEvent-1)==i" class="active-event">{{i+1}}</span>
+           <span *ngIf="(this.sharedInfo.currentEvent-1)!=i">{{i+1}}</span>
+          </button>
 
-          <li *ngIf="sharedInfo.currentEvent<getFromApi.events.length" (click)="incEvent()">
-            <a aria-label="Next">
+          <button *ngIf="sharedInfo.currentEvent<getFromApi.events.length" (click)="incEvent()">
+        
               <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
+           
+          </button>
         </ul>
       </nav>
       <!-- End of Pagination Controls -->
