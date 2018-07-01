@@ -21,8 +21,7 @@
         <!-- <div >{{getFromApi.events[sharedInfo.currentEvent-1]['type']}}</div> -->
         <div>
           @ {{getFromApi.events[sharedInfo.currentEvent-1]['location']['name']}}
-          <a href="{{googleMapLink(getFromApi.events[sharedInfo.currentEvent-1]['location']['latitude'],getFromApi.events[sharedInfo.currentEvent-1]['location']['longitude'])}}"
-            target="_blank">
+          <a href="#" (click)="toggleMapView()">
             <span class="glyphicon glyphicon-map-marker loc" aria-hidden="true"></span>
           </a>
         </div>
@@ -30,16 +29,11 @@
       <div>hosted by: {{getFromApi.events[sharedInfo.currentEvent-1]['creator']['name']}}</div>
       <br>
 
-      <!-- 
-        TODO - Fix this thing :/
-        Displaying map preview -->
-      <!-- <iframe class="map" id="gmap_canvas" src="{{googleMapLink(getFromApi.events[sharedInfo.currentEvent-1]['location']['latitude'],getFromApi.events[sharedInfo.currentEvent-1]['location']['longitude'])}}"
-        frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe> -->
-        
-        <!-- <iframe width="100%" height="600" src="https://maps.google.com/maps?width=100%&height=600&hl=en&coord=51.517608,-0.127625&q=Malet%20St%2C%20London%20WC1E%207HU%2C%20United%20Kingdom+(Your%20Business%20Name)&ie=UTF8&t=&z=18&iwloc=B&output=embed"
-        frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe> -->
-
-
+      <!-- Displaying map preview  -->
+      <iframe id="gMap" class="map" hidden="true" src="" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
+        <span id="{{ iFrameSrc(getFromApi.events[sharedInfo.currentEvent-1]['location']['latitude'],getFromApi.events[sharedInfo.currentEvent-1]['location']['longitude']) }}"></span>
+      </iframe>
+      
       <!-- Displaying Attendees -->
 
       <div class="pull-left">

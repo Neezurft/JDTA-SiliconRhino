@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GetfromapiService } from '../getfromapi.service'
 import { SharedinfoService } from '../sharedinfo.service'
+import { ElementRef } from '@angular/core'
 
 @Component({
   selector: 'app-event-info',
@@ -9,7 +10,7 @@ import { SharedinfoService } from '../sharedinfo.service'
 })
 export class EventInfoComponent implements OnInit {
 
-  constructor(private sharedInfo: SharedinfoService, public getFromApi: GetfromapiService) { }
+  constructor(private hostElement: ElementRef, private sharedInfo: SharedinfoService, public getFromApi: GetfromapiService) { }
 
   ngOnInit() {
   }
@@ -49,22 +50,37 @@ export class EventInfoComponent implements OnInit {
   
   changeEvent(i){
     this.sharedInfo.currentEvent=i+1;
+    this.hideMapView();
   }
 
   decEvent(i){    
-      this.sharedInfo.currentEvent--;
+    this.sharedInfo.currentEvent--;
+    this.hideMapView();
   }
 
   incEvent(i){    
-      this.sharedInfo.currentEvent++;
+    this.sharedInfo.currentEvent++;
+    this.hideMapView();
   }
 
   googleMapLink(lat,lon):string{
 
-    //TODO Part of the map preview fix
-    //return "https://maps.google.com/maps?width=100%&height=600&hl=en&coord=51.517608,-0.127625&q=Malet%20St%2C%20London%20WC1E%207HU%2C%20United%20Kingdom+(Your%20Business%20Name)&ie=UTF8&t=&z=18&iwloc=B&output=embed";
-    return "https://www.google.com/maps/?q="+lat+","+lon;
+    return "https://maps.google.com/maps?width=100%&height=600&hl=en&q="+lat+","+lon+"&ie=UTF8z=18&output=embed";
+  }
 
+  toggleMapView(){
+    this.hostElement.nativeElement.querySelector('iFrame').hidden=!this.hostElement.nativeElement.querySelector('iFrame').hidden;
+  }
+
+  hideMapView(){
+    this.hostElement.nativeElement.querySelector('iFrame').hidden=true;
+  }
+
+  // So... Aparently there is a bug in Angular that doesn't allow
+  // data binding to the src attribute of an iframe, so this little trick
+  // below is a workaround.
+  iFrameSrc(lat,lon){
+    this.hostElement.nativeElement.querySelector('iFrame').src=this.googleMapLink(lat,lon);
   }
   
 }
