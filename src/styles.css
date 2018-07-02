@@ -43,24 +43,12 @@ body {
   box-shadow: 0 0 0 0.2rem #4c38008c;
 }
 
-.drinks-app input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-.drinks-app input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
+/* Custom button styling */
 
 .btn {
   background-color: #4C3800;
   border-color: #4C3800;
 }
-
-/* Custom button styling */
 
 .btn:hover {
   background-color: #dbb561;
@@ -84,6 +72,8 @@ body {
 .show>.btn-primary.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.2rem #4C3800;
 }
+
+/* Styling for comments */
 
 img.avatar{
   border-radius: 50%;
@@ -118,8 +108,8 @@ img.avatar{
   font-size: 0.7em;
 }
 
+/* Styling for the Event's Info Screen */
 .event-name{
-  /* font-family: "Brush Script MT", Brush Script Std, cursive; */
   color: #4C3800;
   font-size: 3em;
   font-weight: bold;

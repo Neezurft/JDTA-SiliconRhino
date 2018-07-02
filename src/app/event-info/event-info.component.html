@@ -1,44 +1,47 @@
 <!-- Loading screen -->
-
 <div *ngIf="sharedInfo.showInfo&&(!getFromApi.loaded)">
   <div class="loader"></div>
 </div>
 
-<!-- Event Info Screen -->
-
+<!-- Event Page -->
 <div *ngIf="sharedInfo.showInfo&&getFromApi.loaded" class="container-fluid">
 
-  <!-- Displaying Event's gen. info -->
+  <!-- Displaying Error message if event retrieval was unsuccessful -->
+  <div *ngIf="(getFromApi.error || getFromApi.events.length==0)" class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+      <span class="glyphicon glyphicon-alert error" aria-hidden="true"></span>
+      <p class="error-message">
+        Sorry, there has been an error or your search did not produce any results. Please try again.
+      </p>
+    </div>
+  </div>
+
+  <!-- Displaying Event's gen. info if result loaded and no error -->
   <div *ngIf="!(getFromApi.error || getFromApi.events.length==0)">
 
+    <!-- Event's title, date and host -->
     <div class="row event-title-heading navbar-fixed-top">
       <h1 class="event-name col-xs-12">
         {{getFromApi.events[sharedInfo.currentEvent-1]['title']}}
         <img src="{{imgUrl(getFromApi.events[sharedInfo.currentEvent-1]['type'])}}" height="30">
-      </h1>
+      </h1>      
       <div>
         <div>{{getFromApi.events[sharedInfo.currentEvent-1]['time'] | date: 'long'}}</div>
-
-        <strong>
-          <!-- <div >{{getFromApi.events[sharedInfo.currentEvent-1]['type']}}</div> -->
-
-        </strong>
         <div>hosted by: {{getFromApi.events[sharedInfo.currentEvent-1]['creator']['name']}}</div>
         <br>
       </div>
-
     </div>
 
+    <!-- Event's Attendees and Map and Comments -->
     <div class="container event-content">
 
-      <div class="row">
-        <!-- Displaying Attendees -->
+      <!-- Displaying Attendees -->
+      <div class="row">        
         <div class="col-xs-12">
           <strong class="pull-left">Attending ({{getFromApi.events[sharedInfo.currentEvent-1]['guests'].length}}):</strong>
         </div>
         <br>
         <br>
-
         <div *ngFor="let g of getFromApi.events[sharedInfo.currentEvent-1]['guests']" class="col-xs-3 col-sm-2">
           <div class="row">
             <img class="avatar" src="{{g['avatarUrl']}}" height="50" width="50">
@@ -47,17 +50,14 @@
             {{g['name']}}
           </div>
         </div>
-
         <div class="col-xs-12">
           <br>
         </div>
-
       </div>
 
       <div class="row">
-
+        <!-- Displaying Map View -->
         <div class="col-sm-4 col-sm-push-8">
-          <!-- Displaying map preview  -->
           <div class="row map-container">
             <div class="map-heading">
               <span class="glyphicon glyphicon-map-marker loc" aria-hidden="true"></span>
@@ -72,42 +72,38 @@
           <br>
         </div>
 
-        <div class="col-sm-8 col-sm-pull-4">
+        <!-- Displaying Comments -->
+        <div class="col-sm-8 col-sm-pull-4"> 
 
-          <!-- Displaying Comments -->
+           <!-- In case there are no comments -->        
           <div *ngIf="getFromApi.events[sharedInfo.currentEvent-1]['comments']==''">
               <div class="pull-left">
-                  <strong>Comments:</strong>
-                  
-                </div>
-               <div>
-                 <br><br>
-               </div>
-                <div class="pull-left">
-                  
-                    No comments to show
-                  </div>
-                  <br>
+                  <strong>Comments:</strong>                  
+              </div>
+              <div>
+                <br><br>
+              </div>
+              <div class="pull-left">
+                No comments to show
+              </div>
+              <br>
           </div>
 
-
+          <!-- If there are indeed comments --> 
           <div *ngIf="getFromApi.events[sharedInfo.currentEvent-1]['comments']!=''">
             <div class="pull-left">
               <strong>Comments:</strong>
             </div>
             <br>
-
             <div class="container-fluid">
               <br>
-
+              <!-- Each comment display-->
               <div *ngFor="let n of getFromApi.events[sharedInfo.currentEvent-1]['comments']; let i=index" class="row">
-
+                <!-- Avatar-->
                 <div class="col-xs-3 col-sm-2">
                   <img class="avatar" src="{{n['user']['avatarUrl']}}" height="50" width="50">
                 </div>
-
-                <!-- <div class="col-xs-1"></div> -->
-
+                <!-- Comment-->
                 <div class="col-xs-9 col-sm-8">
                   <div class="comment-box">
                     <div class="row text-left">
@@ -118,14 +114,10 @@
                       {{n['timestamp'] | date: 'short'}}
                     </div>
                   </div>
-                </div>
-
+                </div><!-- Comment End-->
               </div>
-              <!-- End of Individual Comment wrapper -->
-
             </div>
           </div>
-          <!-- End of Comments Section -->
 
         </div>
 
@@ -134,29 +126,14 @@
     </div>
 
   </div>
-  <!-- End of Event info -->
 
-  <div *ngIf="(getFromApi.error || getFromApi.events.length==0)" class="row">
-
-    <div class="col-sm-6 col-sm-offset-3">
-      <span class="glyphicon glyphicon-alert error" aria-hidden="true"></span>
-      <p class="error-message">
-        Sorry, there has been an error or your search did not produce any results. Please try again.
-      </p>
-    </div>
-
-
-  </div>
-
+  <!-- Displaying Pagination Controls -->
   <div *ngIf="getFromApi.events.length>1" class="row">
-    <div class="col-sm-4 col-sm-offset-4">
-      <!-- Displaying Pagination Controls -->
+    <div class="col-sm-4 col-sm-offset-4">      
       <nav aria-label="Page navigation">
         <ul class="pagination">
           <button *ngIf="sharedInfo.currentEvent>1" (click)="decEvent()">
-
             <span aria-hidden="true">&laquo;</span>
-
           </button>
 
           <button *ngFor="let n of getFromApi.events; index as i" (click)="changeEvent(i)">
@@ -165,21 +142,18 @@
           </button>
 
           <button *ngIf="sharedInfo.currentEvent<getFromApi.events.length" (click)="incEvent()">
-
             <span aria-hidden="true">&raquo;</span>
-
           </button>
         </ul>
       </nav>
-      <!-- End of Pagination Controls -->
     </div>
   </div>
 
+  <!-- Displaying Go Back Button -->
   <div class="row">
     <div class="col-sm-4 col-sm-offset-4">
       <button id="goBackBtn" (click)="onClick()" class="btn btn-lg btn-primary btn-block">Go back</button>
     </div>
   </div>
-
 
 </div>

@@ -15,14 +15,16 @@ export class EventInfoComponent implements OnInit {
   ngOnInit() {
   }
 
+  // On Click Event for the Go Back Buttton
+  // The relevant properties are reset
   onClick() {
     this.sharedInfo.showInfo=!this.sharedInfo.showInfo;
     this.getFromApi.error=false;
     this.getFromApi.events=[];
   }  
 
-  imgUrl(type: string): string{
-    
+  //Generates the appropiate image url
+  imgUrl(type: string): string{    
     let iUrl: string;
 
     switch(type){
@@ -47,43 +49,30 @@ export class EventInfoComponent implements OnInit {
     return iUrl;
   }
 
-  //Pagination controls
-  
+  //Pagination control functions  
   changeEvent(i){
     this.sharedInfo.currentEvent=i+1;
-   // this.hideMapView();
   }
 
   decEvent(i){    
     this.sharedInfo.currentEvent--;
-   // this.hideMapView();
   }
 
   incEvent(i){    
     this.sharedInfo.currentEvent++;
-   // this.hideMapView();
   }
 
+  //Generates the embedded google map view link 
   googleMapLink(lat,lon):string{
 
     return "https://maps.google.com/maps?q="+lat+","+lon+"&output=embed";
   }
 
-  toggleMapView(){
-
-    this.hostElement.nativeElement.querySelector('iFrame').hidden=!this.hostElement.nativeElement.querySelector('iFrame').hidden;
-  }
-
-  // hideMapView(){
-
-  //   this.hostElement.nativeElement.querySelector('iFrame').hidden=true;
-  // }
-
   // So... Aparently there is a bug in Angular that doesn't allow
   // data binding to the src attribute of an iframe, so this little trick
   // below is a workaround.
   iFrameSrc(lat,lon){
-    this.hostElement.nativeElement.querySelector('iFrame').src=this.googleMapLink(lat,lon);
+    this.hostElement.nativeElement.querySelector('#gMap').src=this.googleMapLink(lat,lon);
   }
   
 }
