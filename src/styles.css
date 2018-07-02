@@ -144,4 +144,32 @@ img.avatar{
 .map{
   height: 20em;
   width: -webkit-fill-available;
+  background-color: white;
+}
+
+.map-heading{
+  background-color: white;
+  padding-bottom: 20px;
+  padding-top: 15px;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+  font-weight: bolder;
+}
+
+.event-title-heading{
+  background-color: white;
+  margin-bottom: 20px;
+}
+
+.map-container{
+  padding: 0px   16px;
+}
+
+.active-event{
+  font-weight: bold;
+  color: #4C3800;
+}
+
+.event-content{
+  margin-top: 200px;
 }

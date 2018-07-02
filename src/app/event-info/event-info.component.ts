@@ -51,17 +51,17 @@ export class EventInfoComponent implements OnInit {
   
   changeEvent(i){
     this.sharedInfo.currentEvent=i+1;
-    this.hideMapView();
+   // this.hideMapView();
   }
 
   decEvent(i){    
     this.sharedInfo.currentEvent--;
-    this.hideMapView();
+   // this.hideMapView();
   }
 
   incEvent(i){    
     this.sharedInfo.currentEvent++;
-    this.hideMapView();
+   // this.hideMapView();
   }
 
   googleMapLink(lat,lon):string{
@@ -74,10 +74,10 @@ export class EventInfoComponent implements OnInit {
     this.hostElement.nativeElement.querySelector('iFrame').hidden=!this.hostElement.nativeElement.querySelector('iFrame').hidden;
   }
 
-  hideMapView(){
+  // hideMapView(){
 
-    this.hostElement.nativeElement.querySelector('iFrame').hidden=true;
-  }
+  //   this.hostElement.nativeElement.querySelector('iFrame').hidden=true;
+  // }
 
   // So... Aparently there is a bug in Angular that doesn't allow
   // data binding to the src attribute of an iframe, so this little trick
