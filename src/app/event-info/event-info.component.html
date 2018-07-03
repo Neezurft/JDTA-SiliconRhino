@@ -4,7 +4,7 @@
 </div>
 
 <!-- Event Page -->
-<div *ngIf="sharedInfo.showInfo&&getFromApi.loaded" class="container-fluid">
+<div *ngIf="sharedInfo.showInfo&&getFromApi.loaded" class="container">
 
   <!-- Displaying Error message if event retrieval was unsuccessful -->
   <div *ngIf="(getFromApi.error || getFromApi.events.length==0)" class="row">
@@ -20,8 +20,8 @@
   <div *ngIf="!(getFromApi.error || getFromApi.events.length==0)">
 
     <!-- Event's title, date and host -->
-    <div class="row event-title-heading navbar-fixed-top">
-      <div class="container">        
+    <div class="row navbar-fixed-top">
+      <div class="container event-title-heading">        
         <div class="col-sm-8 col-xs-12">
           <div class="title-time">{{getFromApi.events[sharedInfo.currentEvent-1]['time'] | date: 'fullDate'}}</div>
           <div class="title-main">{{getFromApi.events[sharedInfo.currentEvent-1]['title']}}</div>
@@ -173,5 +173,6 @@
       <button id="goBackBtn" (click)="onClick()" class="btn btn-lg btn-primary btn-block">Go back</button>
     </div>
   </div>
+  <p></p>
 
 </div>
