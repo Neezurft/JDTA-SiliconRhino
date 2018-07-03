@@ -21,7 +21,7 @@
 
     <!-- Event's title, date and host -->
     <div class="row navbar-fixed-top">
-      <div class="container event-title-heading">        
+      <div class="container event-title-heading" id="eventInfoNav">        
         <div class="col-sm-8 col-xs-12">
           <div class="title-time">{{getFromApi.events[sharedInfo.currentEvent-1]['time'] | date: 'fullDate'}}</div>
           <div class="title-main">{{getFromApi.events[sharedInfo.currentEvent-1]['title']}}</div>
@@ -44,12 +44,8 @@
       </div>
     </div>
 
-    <!-- TODO Implement a better solution than this -->
-    <div class="hidden-xs" style="height: 150px;"></div>
-    <div class="visible-xs" style="height: 220px;"></div>
-
     <!-- Event's Attendees and Map and Comments -->
-    <div class="container">
+    <div class="container" id="eventInfoWrapper">
 
       <!-- Displaying Map View -->
       <div class="col-sm-4 col-sm-push-8">

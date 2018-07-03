@@ -208,3 +208,7 @@ img.avatar{
   border-width: 2px;
   border-color: grey;
 }
+
+#eventInfoWrapper{
+  padding-top: 10px;
+}
