@@ -127,8 +127,9 @@ img.avatar{
   margin-bottom: 1em;
 }
 
-.loc{
+.info{
   font-size: 20px;
+  color: grey;
 }
 
 .map{
@@ -139,16 +140,17 @@ img.avatar{
 
 .map-heading{
   background-color: white;
-  padding-bottom: 20px;
-  padding-top: 15px;
+  padding-bottom: 10px;
+  padding-top: 10px;
   border-top-left-radius: 7px;
   border-top-right-radius: 7px;
   font-weight: bolder;
 }
 
 .event-title-heading{
-  background-color: white;
+  background-color: #4C3800;
   margin-bottom: 20px;
+  box-shadow: 0px 1px 4px 0px;
 }
 
 .map-container{
@@ -160,10 +162,49 @@ img.avatar{
   color: #4C3800;
 }
 
-.event-content{
-  margin-top: 200px;
-}
-
 #center-trick{
   height: 20vh;
+}
+
+.title-time{
+  color: grey;
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+.title-main{
+  font-size: 3.5rem;
+  color: white;
+  font-family: 'Oleo Script', cursive;
+}
+
+.title-host{
+  color: white;
+  margin-bottom: 8px;
+}
+
+.avatar-title{
+  margin-right: 10px;
+}
+
+.event-logo{
+  width: fit-content;
+  margin: 30px auto;
+  padding: 7px;
+  border-style: solid;
+  border-radius: 20%;
+  border-width: 2px;
+  border-color: grey;
+}
+
+.event-logo-mini{
+  width: fit-content;
+  margin: auto;
+  margin-top: 0px;
+  margin-bottom: 8px;
+  padding: 1px;
+  border-style: solid;
+  border-radius: 20%;
+  border-width: 2px;
+  border-color: grey;
 }
