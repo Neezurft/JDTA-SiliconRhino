@@ -2,8 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { EventFormComponent } from './event-form/event-form.component';
-import { EventInfoComponent } from './event-info/event-info.component';
+import { EventFormComponent } from './components/event-form/event-form.component';
+import { EventInfoComponent } from './components/event-info/event-info.component';
 
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';

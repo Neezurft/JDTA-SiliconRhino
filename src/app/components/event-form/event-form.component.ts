@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { GetfromapiService } from '../getfromapi.service';
-import { SharedinfoService } from '../sharedinfo.service';
+import { GetfromapiService } from '../../services/getfromapi.service';
+import { SharedinfoService } from '../../services/sharedinfo.service';
 
 
 @Component({
