@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GetfromapiService } from '../../services/getfromapi.service';
 import { SharedinfoService } from '../../services/sharedinfo.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,9 +11,7 @@ import { SharedinfoService } from '../../services/sharedinfo.service';
 })
 export class EventFormComponent implements OnInit {
 
-  inputText: string = '';
-
-  constructor(public sharedInfo: SharedinfoService, private getFromApi: GetfromapiService) { }
+  constructor(private router: Router, public sharedInfo: SharedinfoService, private getFromApi: GetfromapiService) { }
 
   ngOnInit() {
   }
@@ -25,16 +24,9 @@ export class EventFormComponent implements OnInit {
   }
 
   // Search button click
-  onClick(){
-
-    //Toggle to event info view.
-    this.sharedInfo.showInfo=!this.sharedInfo.showInfo;
-    this.sharedInfo.currentEvent = 1;    
-    this.getFromApi.loaded=false;
-    
-    //Added small delay to make transitions more subtle
-    //Get Event details
-    setTimeout(()=>{this.getFromApi.getEvent(this.inputText);},100);    
+  onClick(){   
+    this.getFromApi.loaded=false;  //Needed for when users clicks back and searches for a new term
+    this.router.navigateByUrl('/search-results;term='+this.sharedInfo.searchTerm+'/1');    
   }
 
 }

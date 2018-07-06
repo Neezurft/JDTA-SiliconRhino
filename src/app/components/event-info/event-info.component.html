@@ -1,174 +1,132 @@
-<!-- Loading screen -->
-<div *ngIf="sharedInfo.showInfo&&(!getFromApi.loaded)">
-  <div class="loader"></div>
-</div>
-
-<!-- Event Page -->
-<div *ngIf="sharedInfo.showInfo&&getFromApi.loaded" class="container">
-
-  <!-- Displaying Error message if event retrieval was unsuccessful -->
-  <div *ngIf="(getFromApi.error || getFromApi.events.length==0)" class="row">
-    <div class="col-sm-6 col-sm-offset-3">
-      <span class="glyphicon glyphicon-alert error" aria-hidden="true"></span>
-      <p class="error-message">
-        Sorry, there has been an error or your search did not produce any results. Please try again.
-      </p>
-    </div>
-  </div>
-
-  <!-- Displaying Event's gen. info if result loaded and no error -->
-  <div *ngIf="!(getFromApi.error || getFromApi.events.length==0)">
-
-    <!-- Event's title, date and host -->
-    <div class="row navbar-fixed-top">
-      <div class="container event-title-heading" id="eventInfoNav">        
-        <div class="col-sm-8 col-xs-12">
-          <div class="title-time">{{getFromApi.events[sharedInfo.currentEvent-1]['time'] | date: 'fullDate'}}</div>
-          <div class="title-main">{{getFromApi.events[sharedInfo.currentEvent-1]['title']}}</div>
-          <div class="row">
-            <div class="title-host">
-              <img class="avatar-title avatar" src="{{getFromApi.events[sharedInfo.currentEvent-1]['creator']['avatarUrl']}}" height="30"
-                width="30"> Hosted by:
-              <strong>{{getFromApi.events[sharedInfo.currentEvent-1]['creator']['name']}}</strong>
-            </div>
-            <div class="event-logo-mini visible-xs">
-              <img src="{{imgUrl(getFromApi.events[sharedInfo.currentEvent-1]['type'])}}" height="30">
-            </div>
-          </div>
+<div *ngIf="getFromApi.loaded">
+  <!-- Event's title, date and host -->
+  <div class="row navbar-fixed-top">
+    <div class="container event-title-heading" id="eventInfoNav">
+      <div class="col-sm-8 col-xs-12">
+        <div class="title-time">{{event.time | date: 'fullDate'}}</div>
+        <div class="title-main">
+          {{event.title}}
+          <a href="./event/{{event.id}}" (click)="onClick()" target="_blank">
+            <small>
+              <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
+            </small>
+          </a>
         </div>
-        <div class="col-sm-4 hidden-xs">
-          <div class="event-logo">
-            <img src="{{imgUrl(getFromApi.events[sharedInfo.currentEvent-1]['type'])}}" height="50">
+        <div class="row">
+          <div class="title-host">
+            <img class="avatar-title avatar" src="{{event.creator.avatarUrl}}" height="30" width="30"> Hosted by:
+            <strong>{{event.creator.name}}</strong>
+          </div>
+          <div class="event-logo-mini visible-xs">
+            <img src="{{imgUrl(event.type)}}" height="30">
           </div>
         </div>
       </div>
+      <div class="col-sm-4 hidden-xs">
+        <div class="event-logo">
+          <img src="{{imgUrl(event.type)}}" height="50">
+        </div>
+      </div>
     </div>
+  </div>
 
-    <!-- Event's Attendees and Map and Comments -->
-    <div class="container" id="eventInfoWrapper">
+  <!-- Event's Attendees and Map and Comments -->
+  <div class="container" id="eventInfoWrapper">
 
-      <!-- Displaying Map View -->
-      <div class="col-sm-4 col-sm-push-8">
-        <div class="row map-container">
-          <div class="map-heading">
-            <div>
-                <span class="glyphicon glyphicon-time info" aria-hidden="true"></span>
-                {{getFromApi.events[sharedInfo.currentEvent-1]['time'] | date: 'shortTime'}}   
-            </div>
-            <div>
-              <span class="glyphicon glyphicon-map-marker info" aria-hidden="true"></span>
-              {{getFromApi.events[sharedInfo.currentEvent-1]['location']['name']}}
-            </div>            
+    <!-- Displaying Map View -->
+    <div class="col-sm-4 col-sm-push-8">
+      <div class="row map-container">
+        <div class="map-heading">
+          <div>
+            <span class="glyphicon glyphicon-time info" aria-hidden="true"></span>
+            {{event.time | date: 'shortTime'}}
+          </div>
+          <div>
+            <span class="glyphicon glyphicon-map-marker info" aria-hidden="true"></span>
+            {{event.location.name}}
           </div>
         </div>
-        <div class="row map-container">
-          <iframe id="gMap" class="map zoomIn animated" src="" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
-            <span id="{{ iFrameSrc(getFromApi.events[sharedInfo.currentEvent-1]['location']['latitude'],getFromApi.events[sharedInfo.currentEvent-1]['location']['longitude']) }}"></span>
-          </iframe>
+      </div>
+      <div class="row map-container">
+        <iframe id="gMap" class="map zoomIn animated" src="" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
+          <span id="{{ iFrameSrc(event.location.latitude,event.location.longitude) }}"></span>
+        </iframe>
+      </div>
+      <br>
+    </div>
+
+    <!-- Column of Attendees and Comments -->
+    <div class="col-sm-8 col-sm-pull-4">
+
+      <!-- Displaying Attendees -->
+      <div class="row">
+        <div class="col-xs-12">
+          <strong class="pull-left">Attending ({{event.guests.length}}):</strong>
+        </div>
+        <br>
+        <br>
+        <div *ngFor="let g of event.guests" class="col-xs-3 col-sm-2">
+          <div class="row">
+            <img class="avatar" src="{{g.avatarUrl}}" height="50" width="50">
+          </div>
+          <div class="row">
+            {{g.name}}
+          </div>
+        </div>
+        <div class="col-xs-12">
+          <br>
+        </div>
+      </div>
+
+      <!-- In case there are no comments -->
+      <div *ngIf="event.comments==''">
+        <div class="pull-left">
+          <strong>Comments:</strong>
+        </div>
+        <div>
+          <br>
+          <br>
+        </div>
+        <div class="pull-left">
+          No comments to show
         </div>
         <br>
       </div>
 
-      <!-- Column of Attendees and Comments -->
-      <div class="col-sm-8 col-sm-pull-4">
-
-        <!-- Displaying Attendees -->
-        <div class="row">
-          <div class="col-xs-12">
-            <strong class="pull-left">Attending ({{getFromApi.events[sharedInfo.currentEvent-1]['guests'].length}}):</strong>
-          </div>
-          <br>
-          <br>
-          <div *ngFor="let g of getFromApi.events[sharedInfo.currentEvent-1]['guests']" class="col-xs-3 col-sm-2">
-            <div class="row">
-              <img class="avatar" src="{{g['avatarUrl']}}" height="50" width="50">
-            </div>
-            <div class="row">
-              {{g['name']}}
-            </div>
-          </div>
-          <div class="col-xs-12">
-            <br>
-          </div>
+      <!-- If there are indeed comments -->
+      <div *ngIf="event.comments!=''">
+        <div class="pull-left">
+          <strong>Comments:</strong>
         </div>
-
-        <!-- In case there are no comments -->
-        <div *ngIf="getFromApi.events[sharedInfo.currentEvent-1]['comments']==''">
-          <div class="pull-left">
-            <strong>Comments:</strong>
-          </div>
-          <div>
-            <br>
-            <br>
-          </div>
-          <div class="pull-left">
-            No comments to show
-          </div>
+        <br>
+        <div class="container-fluid">
           <br>
-        </div>
-
-        <!-- If there are indeed comments -->
-        <div *ngIf="getFromApi.events[sharedInfo.currentEvent-1]['comments']!=''">
-          <div class="pull-left">
-            <strong>Comments:</strong>
-          </div>
-          <br>
-          <div class="container-fluid">
-            <br>
-            <!-- Each comment display-->
-            <div *ngFor="let n of getFromApi.events[sharedInfo.currentEvent-1]['comments']; let i=index" class="row">
-              <!-- Avatar-->
-              <div class="col-xs-3 col-sm-2">
-                <img class="avatar" src="{{n['user']['avatarUrl']}}" height="50" width="50">
-              </div>
-              <!-- Comment-->
-              <div class="col-xs-9 col-sm-8">
-                <div class="comment-box">
-                  <div class="row text-left">
-                    <strong>{{n['user']['name']}}</strong>
-                  </div>
-                  <div class="row text-center">{{n['message']}}</div>
-                  <div class="time row text-right text-muted">
-                    {{n['timestamp'] | date: 'short'}}
-                  </div>
+          <!-- Each comment display-->
+          <div *ngFor="let n of event.comments; let i=index" class="row">
+            <!-- Avatar-->
+            <div class="col-xs-3 col-sm-2">
+              <img class="avatar" src="{{n.user.avatarUrl}}" height="50" width="50">
+            </div>
+            <!-- Comment-->
+            <div class="col-xs-9 col-sm-8">
+              <div class="comment-box">
+                <div class="row text-left">
+                  <strong>{{n.user.name}}</strong>
+                </div>
+                <div class="row text-center">{{n.message}}</div>
+                <div class="time row text-right text-muted">
+                  {{n.timestamp | date: 'short'}}
                 </div>
               </div>
             </div>
           </div>
         </div>
-
       </div>
+
     </div>
   </div>
+</div>
 
-  <!-- Displaying Pagination Controls -->
-  <div *ngIf="getFromApi.events.length>1" class="row">
-    <div class="col-sm-4 col-sm-offset-4">
-      <nav aria-label="Page navigation">
-        <ul class="pagination">
-          <button *ngIf="sharedInfo.currentEvent>1" (click)="decEvent()">
-            <span aria-hidden="true">&laquo;</span>
-          </button>
-
-          <button *ngFor="let n of getFromApi.events; index as i" (click)="changeEvent(i)">
-            <span *ngIf="(this.sharedInfo.currentEvent-1)==i" class="active-event">{{i+1}}</span>
-            <span *ngIf="(this.sharedInfo.currentEvent-1)!=i">{{i+1}}</span>
-          </button>
-
-          <button *ngIf="sharedInfo.currentEvent<getFromApi.events.length" (click)="incEvent()">
-            <span aria-hidden="true">&raquo;</span>
-          </button>
-        </ul>
-      </nav>
-    </div>
-  </div>
-
-  <!-- Displaying Go Back Button -->
-  <div class="row">
-    <div class="col-sm-4 col-sm-offset-4">
-      <button id="goBackBtn" (click)="onClick()" class="btn btn-lg btn-primary btn-block">Go back</button>
-    </div>
-  </div>
-  <p></p>
-
+<div *ngIf=' this.route.routeConfig.path=="event/:id" '>
+  <app-footer></app-footer>
 </div>
