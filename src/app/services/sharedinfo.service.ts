@@ -4,9 +4,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class SharedinfoService {
-
-  showInfo : boolean = false;
+  
   currentEvent: number = 1;
+  searchTerm: string = '';
 
   constructor() { }
 }

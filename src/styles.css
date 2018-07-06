@@ -209,6 +209,36 @@ img.avatar{
   border-color: grey;
 }
 
+.content-ext-wrapper{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content-wrapper{
+  width: 400px;
+}
+
+#eventInfoNav{
+  height:210px;
+}
+
 #eventInfoWrapper{
   padding-top: 10px;
+  margin-top: 210px;
 }
+
+/* Adjusts the Navbar height and content top margin for big screens */
+
+@media (min-width: 768px) {
+
+  #eventInfoNav{
+    height:130px;
+  }
+
+  #eventInfoWrapper{    
+    margin-top: 130px;
+  }
+
+ }

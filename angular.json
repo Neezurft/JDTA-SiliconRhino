@@ -25,9 +25,7 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": [              
-              "src/gen-script.js"
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {

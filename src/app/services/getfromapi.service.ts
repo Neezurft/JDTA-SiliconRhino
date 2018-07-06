@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Event } from '../interfaces/event';
-import { delay } from 'q';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +13,14 @@ export class GetfromapiService {
   page: number = 1;
   term: string = '';
 
-  url = 'https://mock-api.drinks.test.siliconrhino.io/events?';
+  url = 'https://mock-api.drinks.test.siliconrhino.io/events';
 
   constructor(private http: HttpClient) { }
+
+  //Returns an Observable<Event> by its id
+  getEventById(id){    
+    return this.http.get<Event>(this.url+'/'+id);
+  }
 
   // Trigers an asynchronous iterative process: 
   // this.page is the index and should be initialisated to 1.
@@ -25,15 +29,16 @@ export class GetfromapiService {
   // is returned (no more events to load).
   getEvent(term) {
 
-      this.getEventPage(term,this.page);
-      this.term=term;   
+    this.events=[];  
+    this.getEventPage(term,this.page);
+    this.term=term;   
   }
 
   // Requests to the mock-api server a page of 3 events 
   // to be pushed into the this.events array by
   // this.successHandling()
   getEventPage(term,page) {
-    this.http.get<Event[]>(this.url+"page="+page+"&pageSize="+"3"+"&search="+term).subscribe(
+    this.http.get<Event[]>(this.url+"?page="+page+"&pageSize="+"3"+"&search="+term).subscribe(
       (data: Event[]) => this.successHandling(data),
       (error) => this.errorHandling()
     );     
