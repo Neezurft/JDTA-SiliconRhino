@@ -17,7 +17,7 @@ export class EventInfoComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
+    public route: ActivatedRoute,
     private hostElement: ElementRef,
     public sharedInfo: SharedinfoService,
     public getFromApi: GetfromapiService) { }
