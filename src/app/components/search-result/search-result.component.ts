@@ -3,6 +3,7 @@ import { GetfromapiService } from '../../services/getfromapi.service'
 import { SharedinfoService } from '../../services/sharedinfo.service'
 import { ElementRef } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
+import { Title } from '@angular/platform-browser'
 
 @Component({
   selector: 'app-search-result',
@@ -18,10 +19,14 @@ export class SearchResultComponent implements OnInit {
     private route: ActivatedRoute,
     private hostElement: ElementRef,
     public sharedInfo: SharedinfoService,
-    public getFromApi: GetfromapiService) { }
+    public getFromApi: GetfromapiService,
+    private titleService: Title
+  ) { }
 
   ngOnInit() {
     
+    this.titleService.setTitle('JDTA - Search Results');
+
     // Route parameters are gotten from a snapshot because the
     // search-result-component isn't meant to be re-used.
     // In the case of event-info-component parameters are gotten
@@ -48,16 +53,19 @@ export class SearchResultComponent implements OnInit {
   changeEvent(i){    
     this.sharedInfo.currentEvent=i+1;
     this.router.navigate(['./'+this.sharedInfo.currentEvent], {relativeTo: this.route});
+    window.scrollTo(0,0);
   }
 
   decEvent(i){    
     this.sharedInfo.currentEvent--;
     this.router.navigate(['./'+this.sharedInfo.currentEvent], {relativeTo: this.route});
+    window.scrollTo(0,0);
   }
 
   incEvent(i){    
     this.sharedInfo.currentEvent++;
     this.router.navigate(['./'+this.sharedInfo.currentEvent], {relativeTo: this.route});
+    window.scrollTo(0,0);
   }
 
 }

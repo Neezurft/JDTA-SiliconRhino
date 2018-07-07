@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GetfromapiService } from '../../services/getfromapi.service';
 import { SharedinfoService } from '../../services/sharedinfo.service';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser'
 
 
 @Component({
@@ -11,9 +12,15 @@ import { Router } from '@angular/router';
 })
 export class EventFormComponent implements OnInit {
 
-  constructor(private router: Router, public sharedInfo: SharedinfoService, private getFromApi: GetfromapiService) { }
+  constructor(
+    private router: Router, 
+    public sharedInfo: SharedinfoService, 
+    private getFromApi: GetfromapiService,
+    private titleService: Title
+  ) { }
 
   ngOnInit() {
+    this.titleService.setTitle('JDTA - Search');
   }
 
   // Pressing Enter while in input field

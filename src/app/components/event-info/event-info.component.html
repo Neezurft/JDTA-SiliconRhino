@@ -1,7 +1,7 @@
 <div *ngIf="getFromApi.loaded">
   <!-- Event's title, date and host -->
   <div class="row navbar-fixed-top">
-    <div class="container event-title-heading" id="eventInfoNav">
+    <div class="container event-title-heading content-ext-wrapper" id="eventInfoNav">
       <div class="col-sm-8 col-xs-12">
         <div class="title-time">{{event.time | date: 'fullDate'}}</div>
         <div class="title-main">
@@ -34,7 +34,7 @@
   <div class="container" id="eventInfoWrapper">
 
     <!-- Displaying Map View -->
-    <div class="col-sm-4 col-sm-push-8">
+    <div class="col-sm-6 col-sm-push-6 col-md-5 col-md-push-7">
       <div class="row map-container">
         <div class="map-heading">
           <div>
@@ -56,7 +56,7 @@
     </div>
 
     <!-- Column of Attendees and Comments -->
-    <div class="col-sm-8 col-sm-pull-4">
+    <div class="col-sm-6 col-sm-pull-6 col-md-7 col-md-pull-5">
 
       <!-- Displaying Attendees -->
       <div class="row">
@@ -108,7 +108,7 @@
               <img class="avatar" src="{{n.user.avatarUrl}}" height="50" width="50">
             </div>
             <!-- Comment-->
-            <div class="col-xs-9 col-sm-8">
+            <div class="col-xs-9 col-sm-10 col-md-9">
               <div class="comment-box">
                 <div class="row text-left">
                   <strong>{{n.user.name}}</strong>

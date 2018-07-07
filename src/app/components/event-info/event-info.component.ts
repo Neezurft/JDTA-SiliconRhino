@@ -5,6 +5,7 @@ import { ElementRef } from '@angular/core'
 import { Router, ActivatedRoute, ParamMap } from '@angular/router'
 import { switchMap } from 'rxjs/operators';
 import { Event } from '../../interfaces/event';
+import { Title } from '@angular/platform-browser'
 
 @Component({
   selector: 'app-event-info',
@@ -20,7 +21,9 @@ export class EventInfoComponent implements OnInit {
     public route: ActivatedRoute,
     private hostElement: ElementRef,
     public sharedInfo: SharedinfoService,
-    public getFromApi: GetfromapiService) { }
+    public getFromApi: GetfromapiService,
+    private titleService: Title
+  ) { }
 
   ngOnInit() {
 
@@ -32,6 +35,8 @@ export class EventInfoComponent implements OnInit {
     // route parameters are gotten through a subscription.
     // For the first scenario the snapshot short approach is enough though.
     if(this.route.routeConfig.path=="event/:id"){
+
+      this.titleService.setTitle("JDTA - Event's Info");
 
       //The subscription below is made in order to catch the possibility
       //of a wrong url introduced by user
