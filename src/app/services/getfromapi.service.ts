@@ -13,7 +13,8 @@ export class GetfromapiService {
   page: number = 1;
   term: string = '';
 
-  url = 'https://mock-api.drinks.test.siliconrhino.io/events';
+  // url = 'https://mock-api.drinks.test.siliconrhino.io/events';
+  url = 'http://localhost:8000/events';
 
   constructor(private http: HttpClient) { }
 

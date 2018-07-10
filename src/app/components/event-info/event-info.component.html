@@ -65,7 +65,7 @@
         </div>
         <br>
         <br>
-        <div *ngFor="let g of event.guests" class="col-xs-3 col-sm-2">
+        <div *ngFor="let g of event.guests" class="col-xs-3 col-md-2">
           <div class="row">
             <img class="avatar" src="{{g.avatarUrl}}" height="50" width="50">
           </div>
@@ -127,6 +127,6 @@
   </div>
 </div>
 
-<div *ngIf=' this.route.routeConfig.path=="event/:id" '>
+<div *ngIf='getFromApi.loaded && this.route.routeConfig.path=="event/:id" '>
   <app-footer></app-footer>
 </div>

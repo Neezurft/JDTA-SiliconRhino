@@ -33,3 +33,4 @@ import { FooterComponent } from './components/footer/footer.component'
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+//TODO - Improve pagination behaviour

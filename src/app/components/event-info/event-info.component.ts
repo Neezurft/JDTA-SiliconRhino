@@ -42,8 +42,19 @@ export class EventInfoComponent implements OnInit {
       //of a wrong url introduced by user
       this.getFromApi.getEventById(this.route.snapshot.paramMap.get('id'))
         .subscribe( 
-          (event) => {this.event=event; this.getFromApi.loaded=true;},
-          () => {this.router.navigate(['/not-found']); this.getFromApi.loaded=true;}
+          (event) => {
+            if(event==null)
+              // In case the returned event is empty i.e. does not exists
+              this.router.navigate(['/not-found']);
+            else
+            {
+              this.event=event; 
+              this.getFromApi.loaded=true;
+            } 
+          },
+          () => {
+            this.router.navigate(['/not-found']);
+          }
         );
 
     }else{
