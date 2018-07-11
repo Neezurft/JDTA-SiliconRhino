@@ -14,7 +14,7 @@ export class GetfromapiService {
   term: string = '';
 
   // url = 'https://mock-api.drinks.test.siliconrhino.io/events';
-  url = 'http://localhost:8000/events';
+  url = 'https://api-drinksapp.herokuapp.com/events';
 
   constructor(private http: HttpClient) { }
 

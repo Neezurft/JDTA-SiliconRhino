@@ -2,7 +2,7 @@
 
 This is a solution for the Junior Developer Technical Assessment @ [SiliconRhino](https://www.siliconrhino.io).
 
-The SPA Project retrieves data from a mock-API and displays it to the user.
+The SPA Project retrieves data from an [API](https://github.com/Neezurft/JDTA-SiliconRhino-API) and displays it to the user.
 
 Coded with love by Neezurft.
 
