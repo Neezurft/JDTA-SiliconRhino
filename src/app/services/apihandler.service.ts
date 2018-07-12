@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 import { Event } from '../interfaces/event';
+
+interface userVerRes{
+  valid: boolean;
+}
 
 @Injectable({
   providedIn: 'root'
 })
-export class GetfromapiService {
+export class ApihandlerService {
 
   events: Event[] = new Array();
   error: boolean = false;
@@ -13,14 +18,15 @@ export class GetfromapiService {
   page: number = 1;
   term: string = '';
 
-  // url = 'https://mock-api.drinks.test.siliconrhino.io/events';
-  url = 'https://api-drinksapp.herokuapp.com/events';
+  // url = 'https://mock-api.drinks.test.siliconrhino.io/';
+  // url = 'https://api-drinksapp.herokuapp.com/';
+  url = 'http://localhost:8000/';     // Dev
 
   constructor(private http: HttpClient) { }
 
   //Returns an Observable<Event> by its id
   getEventById(id){    
-    return this.http.get<Event>(this.url+'/'+id);
+    return this.http.get<Event>(this.url+'events/'+id);
   }
 
   // Trigers an asynchronous iterative process: 
@@ -39,7 +45,7 @@ export class GetfromapiService {
   // to be pushed into the this.events array by
   // this.successHandling()
   getEventPage(term,page) {
-    this.http.get<Event[]>(this.url+"?page="+page+"&pageSize="+"3"+"&search="+term).subscribe(
+    this.http.get<Event[]>(this.url+"events?page="+page+"&pageSize="+"3"+"&search="+term).subscribe(
       (data: Event[]) => this.successHandling(data),
       (error) => this.errorHandling()
     );     
@@ -69,6 +75,34 @@ export class GetfromapiService {
     this.loaded = true;
     this.page = 1; 
     this.term = '';
+  }
+
+  addComment(id,comment : string,time){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/x-www-form-urlencoded'
+      })
+    };
+
+    let body = 'id='+id+'&comment='+comment+'&timestamp='+time;
+    
+    return this.http.put(this.url+'addComment',body, httpOptions);
+  }
+
+  deleteComment(id,commentNum){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/x-www-form-urlencoded'
+      })
+    };
+
+    let body = 'id='+id+'&commentNum='+commentNum;
+    
+    return this.http.put(this.url+'deleteComment',body, httpOptions);
+  }
+
+  verifyUser(username,password){
+    return this.http.get<userVerRes>(this.url+'verifyUser?user='+username+'&pass='+password);
   }
 
 }

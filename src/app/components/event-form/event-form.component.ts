@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GetfromapiService } from '../../services/getfromapi.service';
+import { ApihandlerService } from '../../services/apihandler.service';
 import { SharedinfoService } from '../../services/sharedinfo.service';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser'
@@ -15,7 +15,7 @@ export class EventFormComponent implements OnInit {
   constructor(
     private router: Router, 
     public sharedInfo: SharedinfoService, 
-    private getFromApi: GetfromapiService,
+    private apiHandler: ApihandlerService,
     private titleService: Title
   ) { }
 
@@ -32,7 +32,7 @@ export class EventFormComponent implements OnInit {
 
   // Search button click
   onClick(){   
-    this.getFromApi.loaded=false;  //Needed for when users clicks back and searches for a new term
+    this.apiHandler.loaded=false;  //Needed for when users clicks back and searches for a new term
     this.router.navigateByUrl('/search-results;term='+this.sharedInfo.searchTerm+'/1');    
   }
 

@@ -1,4 +1,4 @@
-<div *ngIf="getFromApi.loaded">
+<div *ngIf="apiHandler.loaded">
   <!-- Event's title, date and host -->
   <div class="row navbar-fixed-top">
     <div class="container event-title-heading content-ext-wrapper" id="eventInfoNav">
@@ -6,7 +6,7 @@
         <div class="title-time">{{event.time | date: 'fullDate'}}</div>
         <div class="title-main">
           {{event.title}}
-          <a href="./event/{{event.id}}" (click)="onClick()" target="_blank">
+          <a *ngIf='this.route.routeConfig.path!="event/:id" ' href="./event/{{event.id}}" (click)="onClick()" target="_blank">
             <small>
               <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
             </small>
@@ -104,11 +104,11 @@
           <!-- Each comment display-->
           <div *ngFor="let n of event.comments; let i=index" class="row">
             <!-- Avatar-->
-            <div class="col-xs-3 col-sm-2">
+            <div class="col-xs-3 col-md-2">
               <img class="avatar" src="{{n.user.avatarUrl}}" height="50" width="50">
             </div>
             <!-- Comment-->
-            <div class="col-xs-9 col-sm-10 col-md-9">
+            <div class="col-xs-9 col-md-9">
               <div class="comment-box">
                 <div class="row text-left">
                   <strong>{{n.user.name}}</strong>
@@ -118,8 +118,53 @@
                   {{n.timestamp | date: 'short'}}
                 </div>
               </div>
+              <span *ngIf="(username==n.user.name)&&loggedIn" class="deleteEnabled">
+                <a (click)="deleteComment(i)">x</a>
+              </span>
             </div>
           </div>
+          <!-- Add Comment box -->
+          <div *ngIf='this.route.routeConfig.path=="event/:id" ' class="row comment-box-wrapper"> 
+                     
+            <div *ngIf="notLogged && !attempLog && !loggedIn" class="col-xs-push-3 col-sm-push-2 col-xs-9 col-sm-10 col-md-9">
+              <a (click)="dispLoginForm()" style="cursor:pointer">Login</a> to add a comment
+            </div>
+
+            <div *ngIf="attempLog && !logingIn" class="col-xs-push-3 col-sm-push-2 col-xs-9 col-sm-10 col-md-9">
+              <div class="row">
+                <div class="col-xs-6" style="padding-right: 0;">
+                    <input [(ngModel)]="username" class="form-control" placeholder="username">
+                </div>
+                
+                <div class="col-xs-6" style="padding-left: 0;">
+                  <div class="toolT">
+                    <span class="toolTText" id="tooltipelem"> Try again </span>
+                  </div>
+                  <input (keyup.enter)="attempLogin()" [(ngModel)]="password" id="passField" class="form-control col-xs-6" type="password" placeholder="password" autofocus>               
+                </div>    
+              </div> 
+              <div class="row">
+                  <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>           
+              </div>
+              
+            </div>
+
+            <div *ngIf="logingIn" class="col-xs-push-3 col-sm-push-2 col-xs-9 col-sm-10 col-md-9">
+              <div class="loader" style="margin:auto; height: 30px; width: 30px;"></div>
+            </div>  
+
+            <div *ngIf="loggedIn">
+              <div class="col-xs-push-3 col-sm-push-2 col-xs-9 col-sm-10 col-md-9">
+                  <input (keyup)="onKey($event)" [(ngModel)]="comment" class="form-control" placeholder="Write your comment"
+                  required autofocus>
+              </div>
+              <div class="col-md-11 col-xs-12">
+                  <a (click)="logout()" class="pull-right" style="cursor:pointer">Logout</a>
+              </div>
+            </div>
+
+          </div>
+
         </div>
       </div>
 
@@ -127,6 +172,6 @@
   </div>
 </div>
 
-<div *ngIf='getFromApi.loaded && this.route.routeConfig.path=="event/:id" '>
+<div *ngIf='apiHandler.loaded && this.route.routeConfig.path=="event/:id" '>
   <app-footer></app-footer>
 </div>

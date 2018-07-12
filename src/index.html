@@ -39,6 +39,9 @@
       height: 60px;
       -webkit-animation: spin 2s linear infinite;
       animation: spin 1.5s linear infinite;
+    }
+
+    .loader-margin{
       margin-top: 40vh;
       margin-bottom: 0.2em;
       margin-left: auto;
@@ -60,7 +63,7 @@
 <body class="text-center">
   <app-root>
     <!-- Loading div that will be replaced once the app is fully loaded -->
-    <div class="loader"></div>
+    <div class="loader loader-margin"></div>
     <!-- Footer -->
     <p>Silicon Rhino &copy;2018</p>
     <p>
@@ -68,8 +71,7 @@
         <img border="0" alt="GitHub" src="./assets/GitHub_Logo.png" height="25">
       </a>
     </p>
-  </app-root>
-  
+  </app-root>  
 </body>
 
 </html>

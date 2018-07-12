@@ -242,3 +242,57 @@ img.avatar{
   }
 
  }
+
+
+ /* Styles for the add-comment-box */
+
+ .comment-box-wrapper{
+  margin-top: 5px;
+  height: 60px;
+ }
+
+ .toolT {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+.toolT .toolTText {
+  visibility: hidden;
+  width: 60px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  top: 25px;
+  right: 0%;
+  font-size: smaller;
+  transition: opacity 2s;
+}
+
+.toolT .toolTText::after {
+  content: " ";
+  position: absolute;
+  bottom: 100%;  /* At the top of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent black transparent;
+}
+
+.deleteEnabled a{
+  color: red;
+  height: 0;
+  width: 0;
+  position: absolute;
+  display: block;
+  right: 30px;
+  font-weight: 800;
+  cursor: pointer;
+  top: 0px;
+  text-decoration: none;
+}

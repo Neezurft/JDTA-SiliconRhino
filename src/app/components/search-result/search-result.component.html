@@ -1,10 +1,10 @@
 <!-- Loading screen -->
-<div *ngIf="!getFromApi.loaded">
-  <div class="loader"></div>
+<div *ngIf="!apiHandler.loaded">
+  <div class="loader loader-margin"></div>
 </div>
 
 <!-- Displaying Error message if event retrieval was unsuccessful -->
-<div *ngIf="getFromApi.loaded&&(getFromApi.error || getFromApi.events.length==0)" class="content-ext-wrapper">
+<div *ngIf="apiHandler.loaded&&(apiHandler.error || apiHandler.events.length==0)" class="content-ext-wrapper">
   <div class="content-wrapper">
     <span class="glyphicon glyphicon-alert error" aria-hidden="true"></span>
     <p class="error-message">
@@ -23,13 +23,13 @@
 </div>
 
 <!-- Displaying Event's gen. info if result loaded and no error -->
-<div *ngIf="getFromApi.loaded && !(getFromApi.error || getFromApi.events.length==0)" class="container">
+<div *ngIf="apiHandler.loaded && !(apiHandler.error || apiHandler.events.length==0)" class="container">
 
   <!-- Displays the Event-Info Component -->
-  <router-outlet *ngIf="getFromApi.loaded"></router-outlet>
+  <router-outlet *ngIf="apiHandler.loaded"></router-outlet>
 
   <!-- Displaying Pagination Controls -->
-  <div *ngIf="getFromApi.events.length>1" class="row">
+  <div *ngIf="apiHandler.events.length>1" class="row">
     <div class="col-sm-4 col-sm-offset-4">
       <nav aria-label="Page navigation">
         <ul class="pagination">
@@ -37,12 +37,12 @@
             <span aria-hidden="true">&laquo;</span>
           </button>
 
-          <button *ngFor="let n of getFromApi.events; index as i" (click)="changeEvent(i)">
+          <button *ngFor="let n of apiHandler.events; index as i" (click)="changeEvent(i)">
             <span *ngIf="(this.sharedInfo.currentEvent-1)==i" class="active-event">{{i+1}}</span>
             <span *ngIf="(this.sharedInfo.currentEvent-1)!=i">{{i+1}}</span>
           </button>
 
-          <button *ngIf="sharedInfo.currentEvent<getFromApi.events.length" (click)="incEvent()">
+          <button *ngIf="sharedInfo.currentEvent<apiHandler.events.length" (click)="incEvent()">
             <span aria-hidden="true">&raquo;</span>
           </button>
         </ul>

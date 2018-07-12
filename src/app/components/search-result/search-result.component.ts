@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GetfromapiService } from '../../services/getfromapi.service'
+import { ApihandlerService } from '../../services/apihandler.service'
 import { SharedinfoService } from '../../services/sharedinfo.service'
 import { ElementRef } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
@@ -19,7 +19,7 @@ export class SearchResultComponent implements OnInit {
     private route: ActivatedRoute,
     private hostElement: ElementRef,
     public sharedInfo: SharedinfoService,
-    public getFromApi: GetfromapiService,
+    public apiHandler: ApihandlerService,
     private titleService: Title
   ) { }
 
@@ -38,14 +38,14 @@ export class SearchResultComponent implements OnInit {
       this.sharedInfo.currentEvent = +this.route.firstChild.snapshot.paramMap.get('result');  
     }      
 
-    this.getFromApi.getEvent(this.sharedInfo.searchTerm);
+    this.apiHandler.getEvent(this.sharedInfo.searchTerm);
   }
 
   // On Click Event for the Go Back Buttton
   // The relevant properties are reset
   onClick() {
-    this.getFromApi.error=false;
-    this.getFromApi.events=[];
+    this.apiHandler.error=false;
+    this.apiHandler.events=[];
     this.router.navigate(['/search']);
   }  
 

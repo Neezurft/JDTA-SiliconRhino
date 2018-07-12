@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GetfromapiService } from '../../services/getfromapi.service'
+import { ApihandlerService } from '../../services/apihandler.service'
 import { SharedinfoService } from '../../services/sharedinfo.service'
 import { ElementRef } from '@angular/core'
 import { Router, ActivatedRoute, ParamMap } from '@angular/router'
@@ -15,13 +15,21 @@ import { Title } from '@angular/platform-browser'
 export class EventInfoComponent implements OnInit {
 
   event: Event;
+  mapLoaded = false;
+  notLogged: boolean = true;
+  attempLog: boolean = false;
+  logingIn: boolean = false;
+  loggedIn: boolean = false;
+  comment: string = '';
+  username: string = '';
+  password: string = '';
 
   constructor(
     private router: Router,
     public route: ActivatedRoute,
     private hostElement: ElementRef,
     public sharedInfo: SharedinfoService,
-    public getFromApi: GetfromapiService,
+    public apiHandler: ApihandlerService,
     private titleService: Title
   ) { }
 
@@ -40,7 +48,7 @@ export class EventInfoComponent implements OnInit {
 
       //The subscription below is made in order to catch the possibility
       //of a wrong url introduced by user
-      this.getFromApi.getEventById(this.route.snapshot.paramMap.get('id'))
+      this.apiHandler.getEventById(this.route.snapshot.paramMap.get('id'))
         .subscribe( 
           (event) => {
             if(event==null)
@@ -48,8 +56,8 @@ export class EventInfoComponent implements OnInit {
               this.router.navigate(['/not-found']);
             else
             {
-              this.event=event; 
-              this.getFromApi.loaded=true;
+              this.event=event;
+              this.apiHandler.loaded=true;
             } 
           },
           () => {
@@ -63,7 +71,8 @@ export class EventInfoComponent implements OnInit {
         switchMap( (params: ParamMap) => params.get('result') )
       ).subscribe( 
         (result) => {
-          this.event=this.getFromApi.events[+result-1];
+          this.mapLoaded=false;
+          this.event=this.apiHandler.events[+result-1];
           if(this.event==null)
             this.router.navigate(['/not-found']);
         }
@@ -108,9 +117,86 @@ export class EventInfoComponent implements OnInit {
   // data binding to the src attribute of an iframe, so this little trick
   // below is a workaround.
   iFrameSrc(lat,lon){
-    this.hostElement.nativeElement.querySelector('#gMap').contentWindow.location.replace(
-      this.googleMapLink(lat,lon)
+    if(!this.mapLoaded){
+      this.hostElement.nativeElement.querySelector('#gMap').contentWindow.location.replace(
+        this.googleMapLink(lat,lon)
+      );
+      this.mapLoaded=true;
+    }    
+  }
+
+  dispLoginForm(){
+    this.attempLog=true;
+    this.username = 'Anonymous';
+    window.setTimeout(function() {
+      document.getElementById("passField").focus();
+    },50);    
+  }
+
+  attempLogin(){
+    this.logingIn=true;
+    this.apiHandler.verifyUser(this.username,this.password)
+    .subscribe((res) => {
+      if(res.valid){
+        this.logingIn=false;
+        this.attempLog=false;
+        this.loggedIn=true;
+        this.password='';
+      }
+      else{
+        this.password='';
+        this.logingIn=false;
+        this.attempLog=true; 
+        window.setTimeout(function() {
+          document.getElementById("passField").focus();
+          document.getElementById("tooltipelem").style.visibility="visible";
+          document.getElementById("tooltipelem").style.opacity="0";
+        },50);         
+      }
+    },() =>{
+      this.password='';
+      this.logingIn=false;
+      this.attempLog=true;
+      window.setTimeout(function() {
+        document.getElementById("passField").focus();
+        document.getElementById("tooltipelem").style.visibility="visible";
+        document.getElementById("tooltipelem").style.opacity="0";
+      },50);    
+    });
+  }
+
+  logout(){
+    this.loggedIn=false;  
+  }
+
+  addComment(){
+    this.apiHandler.addComment(this.event.id,this.comment,Date.now()).subscribe(
+      () => {
+        this.apiHandler.getEventById(this.event.id).subscribe( (event) => {
+          if(event!=null)
+            this.event=event;
+        });
+      }
+    );    
+  }
+
+  deleteComment(commentNumber){
+    this.apiHandler.deleteComment(this.event.id,commentNumber).subscribe(
+      () => {
+        this.apiHandler.getEventById(this.event.id).subscribe( (event) => {
+          if(event!=null)
+            this.event=event;
+        });
+      }
     );
+  }
+
+  onKey(event: any) {
+    if(event.keyCode===13 && this.comment!=''){
+      this.addComment();
+      this.comment='';
+    }
+      
   }
   
 }

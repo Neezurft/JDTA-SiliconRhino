@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GetfromapiService } from '../../services/getfromapi.service';
+import { ApihandlerService } from '../../services/apihandler.service';
 import { Router } from '@angular/router';
 
 
@@ -10,14 +10,14 @@ import { Router } from '@angular/router';
 })
 export class NotFoundComponent implements OnInit {
 
-  constructor(private getFromApi : GetfromapiService, private router : Router) { }
+  constructor(private apiHandler : ApihandlerService, private router : Router) { }
 
   ngOnInit() {
   }
 
   onClick() {
-    this.getFromApi.error=false;
-    this.getFromApi.events=[];
+    this.apiHandler.error=false;
+    this.apiHandler.events=[];
     this.router.navigate(['/search']);
   }
 
