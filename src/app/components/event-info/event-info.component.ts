@@ -135,34 +135,36 @@ export class EventInfoComponent implements OnInit {
 
   attempLogin(){
     this.logingIn=true;
-    this.apiHandler.verifyUser(this.username,this.password)
-    .subscribe((res) => {
-      if(res.valid){
-        this.logingIn=false;
-        this.attempLog=false;
-        this.loggedIn=true;
+    window.setTimeout( ()=>{   
+      this.apiHandler.verifyUser(this.username,this.password)
+      .subscribe((res) => {
+        if(res.valid){
+          this.logingIn=false;
+          this.attempLog=false;
+          this.loggedIn=true;
+          this.password='';
+        }
+        else{
+          this.password='';
+          this.logingIn=false;
+          this.attempLog=true; 
+          window.setTimeout(function() {
+            document.getElementById("passField").focus();
+            document.getElementById("tooltipelem").style.visibility="visible";
+            document.getElementById("tooltipelem").style.opacity="0";
+          },50);         
+        }
+      },() =>{
         this.password='';
-      }
-      else{
-        this.password='';
         this.logingIn=false;
-        this.attempLog=true; 
+        this.attempLog=true;
         window.setTimeout(function() {
           document.getElementById("passField").focus();
           document.getElementById("tooltipelem").style.visibility="visible";
           document.getElementById("tooltipelem").style.opacity="0";
-        },50);         
-      }
-    },() =>{
-      this.password='';
-      this.logingIn=false;
-      this.attempLog=true;
-      window.setTimeout(function() {
-        document.getElementById("passField").focus();
-        document.getElementById("tooltipelem").style.visibility="visible";
-        document.getElementById("tooltipelem").style.opacity="0";
-      },50);    
-    });
+        },50);    
+      });
+    },200);
   }
 
   logout(){

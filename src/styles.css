@@ -16,8 +16,6 @@ body {
   display: -ms-flexbox;
   -ms-flex-align: center;
   align-items: center;
-  padding-top: 0px;
-  padding-bottom: 40px;
   background-color: #e5cb90;
 }
 
@@ -176,32 +174,29 @@ img.avatar{
   font-size: 3.5rem;
   color: white;
   font-family: 'Oleo Script', cursive;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: auto;
 }
 
 .title-host{
   color: white;
   margin-bottom: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .avatar-title{
-  margin-right: 10px;
-}
-
-.event-logo{
-  width: fit-content;
-  margin: 30px auto;
-  padding: 7px;
-  border-style: solid;
-  border-radius: 20%;
-  border-width: 2px;
-  border-color: grey;
+  margin-right: 5px;
+  margin-left: 5px;
 }
 
 .event-logo-mini{
-  width: fit-content;
-  margin: auto;
-  margin-top: 0px;
-  margin-bottom: 8px;
+  width: -moz-fit-content;
+  margin: 0px;
+  margin-right: 5px;
   padding: 1px;
   border-style: solid;
   border-radius: 20%;
@@ -221,12 +216,12 @@ img.avatar{
 }
 
 #eventInfoNav{
-  height:210px;
+  height:120px;
 }
 
 #eventInfoWrapper{
   padding-top: 10px;
-  margin-top: 210px;
+  margin-top: 120px;
 }
 
 /* Adjusts the Navbar height and content top margin for big screens */
@@ -239,6 +234,10 @@ img.avatar{
 
   #eventInfoWrapper{    
     margin-top: 130px;
+  }
+
+  .title-main{
+    max-width: none;
   }
 
  }
@@ -285,7 +284,7 @@ img.avatar{
 }
 
 .deleteEnabled a{
-  color: red;
+  color: #4c3800;
   height: 0;
   width: 0;
   position: absolute;
@@ -295,4 +294,8 @@ img.avatar{
   cursor: pointer;
   top: 0px;
   text-decoration: none;
+}
+
+.avatar-logged{
+  padding: 0px
 }

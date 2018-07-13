@@ -2,29 +2,23 @@
   <!-- Event's title, date and host -->
   <div class="row navbar-fixed-top">
     <div class="container event-title-heading content-ext-wrapper" id="eventInfoNav">
-      <div class="col-sm-8 col-xs-12">
+      <div class="col-xs-12">
         <div class="title-time">{{event.time | date: 'fullDate'}}</div>
         <div class="title-main">
-          {{event.title}}
           <a *ngIf='this.route.routeConfig.path!="event/:id" ' href="./event/{{event.id}}" (click)="onClick()" target="_blank">
             <small>
               <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
             </small>
           </a>
+          {{event.title}}          
         </div>
         <div class="row">
           <div class="title-host">
-            <img class="avatar-title avatar" src="{{event.creator.avatarUrl}}" height="30" width="30"> Hosted by:
-            <strong>{{event.creator.name}}</strong>
+              <img class="event-logo-mini" height="25" width="25" src="{{imgUrl(event.type)}}">
+              Hosted by:
+              <img class="avatar-title avatar" height="30" width="30" src="{{event.creator.avatarUrl}}">
+              <strong>{{event.creator.name}}</strong>
           </div>
-          <div class="event-logo-mini visible-xs">
-            <img src="{{imgUrl(event.type)}}" height="30">
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-4 hidden-xs">
-        <div class="event-logo">
-          <img src="{{imgUrl(event.type)}}" height="50">
         </div>
       </div>
     </div>
@@ -127,13 +121,15 @@
           <div *ngIf='this.route.routeConfig.path=="event/:id" ' class="row comment-box-wrapper"> 
                      
             <div *ngIf="notLogged && !attempLog && !loggedIn" class="col-xs-push-3 col-sm-push-2 col-xs-9 col-sm-10 col-md-9">
-              <a (click)="dispLoginForm()" style="cursor:pointer">Login</a> to add a comment
+              <a (click)="dispLoginForm()" style="cursor:pointer">Login</a> to add/remove comments
             </div>
 
             <div *ngIf="attempLog && !logingIn" class="col-xs-push-3 col-sm-push-2 col-xs-9 col-sm-10 col-md-9">
               <div class="row">
                 <div class="col-xs-6" style="padding-right: 0;">
-                    <input [(ngModel)]="username" class="form-control" placeholder="username">
+                   <strong>
+                      <input [(ngModel)]="username" class="form-control" placeholder="username">
+                   </strong> 
                 </div>
                 
                 <div class="col-xs-6" style="padding-left: 0;">
@@ -142,11 +138,7 @@
                   </div>
                   <input (keyup.enter)="attempLogin()" [(ngModel)]="password" id="passField" class="form-control col-xs-6" type="password" placeholder="password" autofocus>               
                 </div>    
-              </div> 
-              <div class="row">
-                  <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>           
-              </div>
-              
+              </div>               
             </div>
 
             <div *ngIf="logingIn" class="col-xs-push-3 col-sm-push-2 col-xs-9 col-sm-10 col-md-9">
@@ -154,7 +146,10 @@
             </div>  
 
             <div *ngIf="loggedIn">
-              <div class="col-xs-push-3 col-sm-push-2 col-xs-9 col-sm-10 col-md-9">
+              <div class="col-xs-1 col-xs-offset-1 col-xs-push-1 col-md-push-0 avatar-logged">
+                <img class="avatar" src="https://www.shareicon.net/data/128x128/2015/09/16/101936_hacker_512x512.png" height="34" width="34">
+              </div>
+              <div class="col-xs-9 col-xs-offset-1 col-md-9 col-md-offset-0">
                   <input (keyup)="onKey($event)" [(ngModel)]="comment" class="form-control" placeholder="Write your comment"
                   required autofocus>
               </div>
