@@ -37,10 +37,12 @@
             <span aria-hidden="true">&laquo;</span>
           </button>
 
-          <button *ngFor="let n of apiHandler.events; index as i" (click)="changeEvent(i)">
-            <span *ngIf="(this.sharedInfo.currentEvent-1)==i" class="active-event">{{i+1}}</span>
-            <span *ngIf="(this.sharedInfo.currentEvent-1)!=i">{{i+1}}</span>
-          </button>
+          <span *ngFor="let n of apiHandler.events; index as i">
+            <button *ngIf="((currEvent()-2) <= i)&&(i <= currEvent())" (click)="changeEvent(i)">
+              <span *ngIf="(currEvent()-1)==i" class="active-event">{{i+1}}</span>
+              <span *ngIf="(currEvent()-1)!=i">{{i+1}}</span>
+            </button>
+          </span>
 
           <button *ngIf="sharedInfo.currentEvent<apiHandler.events.length" (click)="incEvent()">
             <span aria-hidden="true">&raquo;</span>

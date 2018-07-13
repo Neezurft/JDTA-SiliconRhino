@@ -5,6 +5,7 @@ import { Event } from '../interfaces/event';
 
 interface userVerRes{
   valid: boolean;
+  url?: string;
 }
 
 @Injectable({
@@ -77,14 +78,14 @@ export class ApihandlerService {
     this.term = '';
   }
 
-  addComment(id,comment : string,time){
+  addComment(id,comment,time,username,imgUrl){
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/x-www-form-urlencoded'
       })
     };
 
-    let body = 'id='+id+'&comment='+comment+'&timestamp='+time;
+    let body = 'id='+id+'&comment='+comment+'&timestamp='+time+'&username='+username+'&imgUrl='+imgUrl;
     
     return this.http.put(this.url+'addComment',body, httpOptions);
   }

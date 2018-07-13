@@ -22,6 +22,7 @@ export class EventInfoComponent implements OnInit {
   loggedIn: boolean = false;
   comment: string = '';
   username: string = '';
+  userImgUrl: string = '';
   password: string = '';
 
   constructor(
@@ -143,6 +144,7 @@ export class EventInfoComponent implements OnInit {
           this.attempLog=false;
           this.loggedIn=true;
           this.password='';
+          this.userImgUrl=res.url;
         }
         else{
           this.password='';
@@ -172,7 +174,7 @@ export class EventInfoComponent implements OnInit {
   }
 
   addComment(){
-    this.apiHandler.addComment(this.event.id,this.comment,Date.now()).subscribe(
+    this.apiHandler.addComment(this.event.id,this.comment,Date.now(),this.username,this.userImgUrl).subscribe(
       () => {
         this.apiHandler.getEventById(this.event.id).subscribe( (event) => {
           if(event!=null)

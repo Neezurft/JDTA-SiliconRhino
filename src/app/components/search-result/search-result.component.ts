@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApihandlerService } from '../../services/apihandler.service'
 import { SharedinfoService } from '../../services/sharedinfo.service'
-import { ElementRef } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
 import { Title } from '@angular/platform-browser'
 
@@ -17,7 +16,6 @@ export class SearchResultComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private hostElement: ElementRef,
     public sharedInfo: SharedinfoService,
     public apiHandler: ApihandlerService,
     private titleService: Title
@@ -66,6 +64,11 @@ export class SearchResultComponent implements OnInit {
     this.sharedInfo.currentEvent++;
     this.router.navigate(['./'+this.sharedInfo.currentEvent], {relativeTo: this.route});
     window.scrollTo(0,0);
+  }
+
+  // Implemented to improve readability in html file
+  currEvent():number{
+    return this.sharedInfo.currentEvent;
   }
 
 }
