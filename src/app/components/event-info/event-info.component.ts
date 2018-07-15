@@ -128,9 +128,8 @@ export class EventInfoComponent implements OnInit {
 
   dispLoginForm(){
     this.attempLog=true;
-    this.username = 'Anonymous';
     window.setTimeout(function() {
-      document.getElementById("passField").focus();
+      document.getElementById("usernameField").focus();
     },50);    
   }
 
